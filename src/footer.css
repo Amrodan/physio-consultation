@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins:wght@300;600&display=swap');
+.logo_footer {
+	width: 130px;
+	height: 55px;
+	/* border-radius: 50%; */
+	/* border: 1px solid rgb(36, 36, 30); */
+	margin: 0 auto;
+	text-align: center;
+	align-content: center;
+	/* border-radius: 30%; */
+	font-family: 'Ms Madi', cursive;
+	font-size: 2.5em;
+	margin-bottom: 22px;
+}
+
+footer {
+	background: #477193;
+	padding: 3rem 0;
+	text-align: center;
+	font-size: 0.8rem;
+	margin-top: 7rem;
+}
+footer a {
+	color: cadetblue;
+}
+.footer__logo {
+	font-size: 2rem;
+	font-weight: 500;
+	margin-bottom: 2rem;
+	display: inline-block;
+}
+.permalinks {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2rem;
+	margin: 0 auto 3rem;
+}
+.footer__socials {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 4rem;
+	gap: 1rem;
+}
+.footer__socials a {
+	color: white;
+	background: cadetblue;
+	font-size: 1.5rem;
+	display: flex;
+	border-radius: 0.7rem;
+	padding: 0.8rem;
+	border: 1px solid transparent;
+}
+.footer__socials a:hover {
+	color: cadetblue;
+	background: transparent;
+	border-color: rgb(153, 166, 167);
+}
+.footer__copyright {
+	margin-bottom: 4rem;
+	color: cadetblue;
+}
+
+/* Media queries(small screen) */
+@media screen and (max-width: 600px) {
+	.permalinks {
+		flex-direction: column;
+		gap: 1.5em;
+	}
+	.footer__socials {
+		margin-bottom: 2.5rem;
+	}
+}

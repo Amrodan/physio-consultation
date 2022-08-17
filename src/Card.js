@@ -1,15 +1,18 @@
 import React from 'react';
 import ala2 from './assets/images/ala2.jpg';
-import { CButton } from '@coreui/react';
-import { CgProfile } from 'react-icons/cg';
-import './card.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './styles/card.css';
 function Card() {
+	let navigate = useNavigate();
+	function handleClick() {
+		navigate('/calendar');
+	}
 	return (
 		<div className="flex justify-center">
 			{/* <CgProfile className="text-5xl text-red" /> */}
-			<div id="card" className=" w-3/4  lg:flex mt-64">
+			<div id="card" className=" w-3/4  lg:flex mt-64 ">
 				<div
-					className="h-48 lg:h-auto  w-96	 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+					className="h-48 lg:h-auto card w-96	border-none flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
 					title="Card Profile Image"
 				>
 					<img src={ala2} alt="physio profile" />{' '}
@@ -29,15 +32,17 @@ function Card() {
 						<div className="text-gray-900 font-bold text-xl mb-2 ">
 							{' '}
 							<h3> Ala'a Kanj - a physiotherapist based in the city of Tripoli, Lebanon.</h3>
-							<div className="line w-36 max-w-1/10 h-0.5 bg-green-800 left-44 relative  m-12" />
 						</div>
-						<p className="text-gray-700 text-base leading-10">
+						<div className="flex justify-center mt-10">
+							<div className="line line_wrap w-36 max-w-1/10 h-0.5 bg-green-800       " />
+						</div>
+						<p className="text-gray-700 text-base leading-10 mt-10">
 							Wernicke is a platform that connects physiotherapists with patients. The platform is a tool
 							that helps patients to find the best physiotherapist for them and also helps them to find
 							the best physiotherapist for them.
 						</p>
 					</div>
-					<div className="relative ">
+					<div className=" flex justify-center ">
 						{/* <img
 						className="w-10 h-10 rounded-full mr-4"
 						src="/img/jonathan.jpg"
@@ -47,14 +52,18 @@ function Card() {
 							<p className="text-gray-900 leading-none">Jonathan Reinink</p>
 							<p className="text-gray-600">Aug 18</p>
 						</div> */}
-						<div className="absolute left-[58%]  bottom-1  ">
+						<div href="#message" className="   text-gray-300 ">
 							{' '}
-							<CButton href="#booking" color="success" shape="rounded-pill" className="w-auto h-10 mr-4 ">
-								Book Now
-							</CButton>
-							<CButton shape="rounded-pill" className="w-auto h-10 absolute bg-fixed   ">
-								Message
-							</CButton>
+							<button
+								onClick={handleClick}
+								href="#message"
+								className="bg-gray-800	 mr-4 hover:bg-pink-700	 text-white font-bold py-2 px-4 rounded"
+							>
+								<Link to="/calendar">Book Now</Link>
+							</button>
+							<button className="bg-gray-800	 hover:bg-pink-700	 text-white font-bold py-2 px-4 rounded">
+								<Link to="/contact">Message</Link>
+							</button>
 						</div>
 					</div>
 				</div>

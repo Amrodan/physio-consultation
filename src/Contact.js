@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import './contact.css';
+import './styles/contact.css';
 import { MdOutlineEmail } from 'react-icons/md';
 import { BsWhatsapp } from 'react-icons/bs';
 import emailjs from '@emailjs/browser';
@@ -14,12 +14,12 @@ const Contact = () => {
 		e.target.reset();
 	};
 	return (
-		<section id="booking" className="contact mt-72">
+		<section className="contact  ">
 			<div className="align-center text-center m-8">
 				<h5>Get In Touch</h5>
 				<h2>Contact ME</h2>
 			</div>
-			<div className="container_contact__contaienr mt-24 ">
+			<div id="message" className="container_contact__contaienr mt-24 ">
 				<div className="contact__options">
 					<article className="contact__option">
 						<MdOutlineEmail className="contact__option-icon" />
@@ -30,7 +30,7 @@ const Contact = () => {
 						</a>
 					</article>
 
-					<article className="contact__option">
+					<article id="message" className="contact__option">
 						<BsWhatsapp className="contact__option-icon" />
 						<h4>WhatsApp</h4>
 						<h5>+96176399205</h5>

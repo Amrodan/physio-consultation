@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins:wght@300;600&display=swap');
 .logo {
-	width: 130px;
+	/* width: 130px; */
 	height: 55px;
 	/* border-radius: 50%; */
-	border: 1px solid #662;
-	margin: 0 auto;
+	border: 1px solid rgb(94, 94, 73);
+	/* margin: 0 auto; */
 	background-color: rgb(95, 158, 160);
 	text-align: center;
 	align-content: center;
@@ -12,11 +12,17 @@
 	font-family: 'Ms Madi', cursive;
 	font-size: 1.8em;
 }
-.nav__container {
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+/* .nav__container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
+} */
 .home {
 	border: 3px solid #60a5fa;
 	display: flex;
@@ -31,4 +37,18 @@
 .home:hover {
 	background-color: #60a5fa;
 	color: #fff;
+}
+
+/* Media queries(small screen) */
+@media screen and (max-width: 600px) {
+	.nav__container {
+	}
+}
+
+/* Media queries(med screen) */
+@media screen and (max-width: 800px) {
+	.nav__container {
+	}
+}
+@media screen and (max-width: 1024px) {
 }

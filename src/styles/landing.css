@@ -1,0 +1,101 @@
+/* .nav_open {
+	display: none;
+} */
+/* Media queries(small screen) */
+@media screen and (max-width: 660px) {
+	.text-wrapper {
+		font-size: 10px;
+		width: 90%;
+		position: relative;
+		top: -100px;
+		left: 8px;
+	}
+	.text-wrap {
+		font-size: 9px;
+		width: 176px;
+		left: 7px;
+		position: relative;
+
+		top: -213px;
+		line-height: 1.9;
+	}
+	.small {
+		font-size: 0.7em;
+	}
+
+	.GetStarted {
+		background-color: black;
+		font-size: 0.7em;
+		width: 10%;
+		margin: 0.5em;
+		height: 10%;
+	}
+	.btn_span {
+		position: relative;
+		top: -82px;
+		background-color: black;
+
+		left: 100px;
+	}
+}
+
+/* Media queries(med screen) */
+
+@media screen and (max-width: 1024px) and (min-width: 661px) {
+	.text-wrapper {
+		font-size: 10px;
+		width: 95%;
+		position: relative;
+		top: -200px;
+		left: 8px;
+	}
+	.text-wrap {
+		position: relative;
+		top: -445px;
+	}
+	.small {
+		font-size: 0.7em;
+	}
+
+	.GetStarted {
+		font-size: 0.7em;
+		width: 10%;
+		margin: 0.5em;
+		height: 10%;
+		background-color: red;
+	}
+	.btn_span {
+		position: relative;
+		top: -82px;
+		background-color: red;
+
+		left: 100px;
+	}
+}
+@media screen and (max-width: 1280px) and (min-width: 1024px) {
+	.text-wrapper {
+		font-size: 10px;
+		bottom: 6%;
+		left: 2rem;
+		top: -172px;
+	}
+
+	.small {
+		font-size: 0.7em;
+	}
+
+	.GetStarted {
+		font-size: 0.7em;
+		width: 10%;
+		margin: 0.5em;
+		height: 10%;
+		background-color: yellow;
+	}
+	.btn_span {
+		position: relative;
+		top: -82px;
+		background-color: yellow;
+
+		left: 100px;
+	}
+}

@@ -6,10 +6,11 @@ import LandingPage from './LandingPage';
 import Card from './Card';
 import Contact from './Contact';
 import Footer from './Footer';
-// import TestCalendar from './TestCalendar';
-// import styled from 'styled-components';
+import Home from './components/Home';
+import ChatPage from './components/ChatPage';
+import socketIO from 'socket.io-client';
 
-import Register from './auth2/Register';
+import Register1 from './auth2/Register1';
 import VerifyEmail from './auth2/VerifyEmail';
 import Login from './auth2/Login';
 import { useState, useEffect } from 'react';
@@ -19,6 +20,10 @@ import firebase from 'firebase/compat/app';
 import ApointmentPage from './Apointment/ApointmentPage';
 import { AuthProvider } from './Authcontext/AuthContext';
 import Test3 from './Test3';
+import Login2 from './auth2/Login2';
+
+const socket = socketIO.connect('http://localhost:4000');
+
 function App() {
 	const [ currentUser, setCurrentUser ] = useState(null);
 	const [ timeActive, setTimeActive ] = useState(false);
@@ -30,14 +35,14 @@ function App() {
 			setCurrentUser(user);
 		});
 	}, []);
-	// const getDate = () => {
-	// 	const a = firebase.firestore.Timestamp.now().toDate().toString();
-	// 	setCurr(a);
-	// };
+
 	return (
 		<Router>
 			{' '}
 			<div>
+				{/* <Login1 /> */}
+				{/* <Login2 /> */}
+				{/* <Login3 /> */}
 				{/* <Na /> */}
 				<Navbar />
 				{/* <Test3 /> */}
@@ -45,10 +50,10 @@ function App() {
 
 				<AuthProvider value={{ currentUser, timeActive, setTimeActive }}>
 					<Routes>
-						{/* <Route path={'/'} element={<LandingPage />} /> */}
-						{/* <Route path={'/chat'} element={<Firestor />} /> */}
+						<Route path={'/'} element={<LandingPage />} />
+						{/* <Route path="/" element={<Home socket={socket} />} /> */}
+						{/* <Route path="/chat" element={<ChatPage socket={socket} />} /> */}
 
-						{/* <Route path={''} element={<TextWrapper />} /> */}
 						<Route path={'/about'} element={<Card />} />
 						<Route path={'/contact'} element={<Contact />} />
 						<Route path="calendar" element={<ApointmentPage />} />
@@ -56,12 +61,12 @@ function App() {
 							<Route path="/profile" element={<Profile />} />
 						</Route>
 
-						<Route path="/signin" element={<Login />} />
-						<Route path="/signup" element={<Register />} />
+						<Route path="/signin" element={<Login2 />} />
+						<Route path="/signup" element={<Register1 />} />
 						<Route path="/verify-email" element={<VerifyEmail />} />
 					</Routes>
 				</AuthProvider>
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		</Router>
 	);

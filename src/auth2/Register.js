@@ -67,6 +67,7 @@ function Register() {
 					/>
 
 					<input
+						className="border relative bg-gray-100 p-2"
 						type="password"
 						value={confirmPassword}
 						required

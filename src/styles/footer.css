@@ -1,26 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins:wght@300;600&display=swap');
 .logo_footer {
-	width: 130px;
-	height: 55px;
-	/* border-radius: 50%; */
-	/* border: 1px solid rgb(36, 36, 30); */
+	height: 50px;
+
 	margin: 0 auto;
 	text-align: center;
 	align-content: center;
-	/* border-radius: 30%; */
+
 	font-family: 'Ms Madi', cursive;
 	font-size: 2.5em;
 	margin-bottom: 22px;
 }
 
 footer {
-	background-color: #2f2f69;
-	padding: 3rem 0;
+	background-color: #2a9d8f;
+	padding: 2rem 0;
 	text-align: center;
 	font-size: 0.8rem;
+
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
-footer a {
-	color: cadetblue;
+footer a,
+.footer__copyright {
+	color: white;
+}
+footer a:hover {
+	color: #e9c46a;
 }
 .footer__logo {
 	font-size: 2rem;
@@ -43,7 +49,7 @@ footer a {
 }
 .footer__socials a {
 	color: white;
-	background: cadetblue;
+	background: #264653;
 	font-size: 1.5rem;
 	display: flex;
 	border-radius: 0.7rem;
@@ -51,13 +57,9 @@ footer a {
 	border: 1px solid transparent;
 }
 .footer__socials a:hover {
-	color: cadetblue;
+	color: #e9c46a;
 	background: transparent;
-	border-color: rgb(153, 166, 167);
-}
-.footer__copyright {
-	margin-bottom: 4rem;
-	color: cadetblue;
+	border-color: rgb(83, 91, 92);
 }
 
 /* Media queries(small screen) */

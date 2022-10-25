@@ -34,6 +34,7 @@
     "mongoose": "^6.5.1",
     "nodemon": "^2.0.19",
     "react": "^18.0.0",
+    "react-animated-heart": "^0.0.7",
     "react-big-calendar": "^0.40.1",
     "react-bootstrap": "^2.4.0",
     "react-calendar": "^3.7.0",

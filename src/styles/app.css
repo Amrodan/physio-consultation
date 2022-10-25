@@ -11,8 +11,8 @@
 }
 
 :root {
-	--color-bg: #4c6176;
-	--color-bg-variant: #2c2c6c;
+	--color-bg: #264653;
+	--color-bg-variant: #cce3de;
 	--color-primary: #4db5ff;
 	--color-primary-variant: rgba(77, 181, 255, 0.4);
 	--color-white: #fff;
@@ -32,6 +32,7 @@ body {
 	font-family: 'Poppins', sans-serif;
 	background: var(--color-bg);
 	color: var(--color-white);
+
 	line-height: 1.7;
 	background-image: url('https://unsplash.com/s/photos/portfolio-background');
 }
@@ -87,7 +88,15 @@ a {
 }
 .btn-primary {
 	background: var(--color-primary);
-	color: var(--color-bg);
+	color: #351f19;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	border: 1px solid var(--color-primary);
+	transition: var(--transition);
+}
+
+.btn-primary:hover {
+	color: #e7cda5;
 }
 img {
 	display: block;
@@ -241,6 +250,36 @@ img {
 	font-size: 13px;
 	font-style: italic;
 }
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	cursor: default;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	padding: 0.25em 0.5em;
+	background-color: gainsboro;
+	color: red;
+	text-align: center;
+	border-radius: 0.25em;
+	white-space: nowrap;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 3;
+	top: 0%;
+
+	right: 139%;
+	transition-property: visibility;
+	transition-delay: 0s;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	transition-delay: 0.3s;
+}
 /* Media queries(med screen) */
 @media screen and (max-width: 1024px) {
 	.container {
@@ -251,18 +290,46 @@ img {
 		margin-top: 6rem;
 	}
 }
+@media screen and (max-width: 700px) {
+	.appointmentPage {
+		grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+	}
+	.nav_open {
+		display: none !important;
+	}
+	.btn_span {
+		left: 62px;
+		top: 40px;
+	}
+	.feed_container {
+		max-width: 23rem; /* 350px */
+		font-size: smaller;
+	}
+	.input_post {
+		min-width: 88px;
+		max-width: 160px;
+		font-size: smaller;
+	}
+	.create_post {
+		display: none;
+	}
+}
 
 /* Media queries(small screen) */
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 600px) {
 	.container {
 		width: var(--container-width-sm);
 	}
 	section > h2 {
 		margin-bottom: 2rem;
 	}
+
 	section {
 		margin-top: 4rem;
 		margin: 0.7rem;
 		padding-bottom: 6rem;
+	}
+	.create_post {  
+		display: none;
 	}
 }

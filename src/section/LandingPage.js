@@ -52,16 +52,29 @@ function TextWrapper() {
 					</p>
 				</article>
 			</section>
-			<section className="flex justify-center">
+			<section className="utube flex justify-center relative p-12">
 				<iframe
+					className="m-8"
 					width="560"
 					height="315"
 					src="https://www.youtube.com/embed/JaH5acKORUs"
 					title="YouTube video player"
-					frameborder="0"
+					frameBorder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowfullscreen
+					allowFullScreen
 				/>
+				<detail className="absolute">
+					<summary>
+						Visit my{' '}
+						<a
+							href="https://www.youtube.com/channel/UCIvlK9PeLuPdg-PMC1Ln-fA/featured"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Channel on youtube
+						</a>
+					</summary>
+				</detail>
 			</section>
 		</div>
 	);

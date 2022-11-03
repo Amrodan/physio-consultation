@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Profile, Register1, Login2, VerifyEmail, auth } from './components/index';
-import { LandingPage, Card, Contact, Footer, Navbar, ApointmentPage } from './section/index';
+import { Profile, Register1, Login2, VerifyEmail, auth, RequireAuth } from './components/index';
+import { LandingPage, Card, Contact, Footer, Navbar, ApointmentPage, NotAuthNavbar, Feed } from './section/index';
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthProvider } from './context/AuthContext';
 // import ProtectedRoute from './components/protectedRoutes';
-import Feed from './section/feed';
-import RequireAuth from './components/requireAuth';
-import NotAuthNavbar from './section/logOutNav';
+
 function App() {
 	const [ currentUser, setCurrentUser ] = useState(null);
 	const [ timeActive, setTimeActive ] = useState(false);

@@ -1,6 +1,5 @@
 import React from 'react';
 import run from '../assets/images/run.jpg';
-import { CButton } from '@coreui/react';
 import '../styles/landing.css';
 import { Link } from 'react-router-dom';
 function LandingPage() {

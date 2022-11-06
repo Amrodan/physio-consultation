@@ -20,7 +20,7 @@ const NotAuthNavbar = () => {
 	return (
 		<nav className="navbar">
 			<Link to="/" className="nav-logo items-end inline-flex">
-				<img src={logo41} alt="Dr Logo" className="nav-logo h-20" />
+				{/* <img src={logo41} alt="Dr Logo" className="nav-logo h-20" /> */}
 				<h2>Omega PT</h2>
 			</Link>
 

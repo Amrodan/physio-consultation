@@ -5,6 +5,7 @@ import { LandingPage, Card, Contact, Footer, Navbar, ApointmentPage, NotAuthNavb
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthProvider } from './context/AuthContext';
 // import ProtectedRoute from './components/protectedRoutes';
+import Reset from './components/reset';
 
 function App() {
 	const [ currentUser, setCurrentUser ] = useState(null);
@@ -42,6 +43,7 @@ function App() {
 							<Route path="calendar" element={<ApointmentPage />} />
 						</Route>
 						<Route path="/signin" element={<Login2 />} />
+						<Route path="/reset" element={<Reset />} />
 						<Route path="/signup" element={<Register1 />} />
 						<Route path="/verify-email" element={<VerifyEmail />} />
 						<Route
@@ -55,7 +57,7 @@ function App() {
 										justifyContent: 'center'
 									}}
 								>
-									There's nothing here: 404! go to<pre> </pre> <Link to="/"> Home page</Link>
+									There's nothing here: 404! go to &nbsp;<Link to="/"> Home page</Link>
 								</p>
 							}
 						/>

@@ -1,16 +1,21 @@
 import { useState } from 'react';
 
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import {
+	createUserWithEmailAndPassword,
+	sendEmailVerification,
+	signInWithPopup,
+	FacebookAuthProvider,
+	GoogleAuthProvider
+} from 'firebase/auth';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from './../components/firebase';
 
 import { Link, useNavigate } from 'react-router-dom';
 import './forms.css';
 import { auth } from '../components/firebase';
 import { useAuthValue } from '../context/AuthContext';
-import { signInWithPopup, FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
-
-import loginImg from '../assets/images/login.jpg';
 
 export default function Register1() {
 	const { setTimeActive } = useAuthValue();
@@ -25,7 +30,7 @@ export default function Register1() {
 		const provider = new FacebookAuthProvider();
 		signInWithPopup(auth, provider)
 			.then((res) => {
-				console.log(res);
+				history('/profile');
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -35,7 +40,7 @@ export default function Register1() {
 		const provider = new GoogleAuthProvider();
 		signInWithPopup(auth, provider)
 			.then((res) => {
-				console.log(res);
+				history('/profile');
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -51,24 +56,47 @@ export default function Register1() {
 		}
 		return isValid;
 	};
-	const register = (e) => {
+	const registerWithEmailAndPassword = async (e, name, email, password) => {
+		// console.log(e);
 		e.preventDefault();
-		setError('');
-		if (validatePassword()) {
-			// Create a new user with email and password using firebase
-			createUserWithEmailAndPassword(auth, email, password).then(() => {
-				sendEmailVerification(auth.currentUser)
-					.then(() => {
-						setTimeActive(true);
-						history('/verify-email');
-					})
-					.catch((err) => alert(err.message));
-			});
+		try {
+			if (validatePassword()) {
+				const res = await createUserWithEmailAndPassword(auth, email, password);
+				sendEmailVerification(auth.currentUser).then(() => {
+					setTimeActive(true);
+					history('/verify-email');
+				});
+				const user = res.user;
+				await addDoc(collection(db, 'users'), {
+					uid: user.uid,
+					name,
+					authProvider: 'local',
+					email
+				});
+			}
+		} catch (err) {
+			console.error(err);
+			alert(err.message);
 		}
-		setEmail('');
-		setPassword('');
-		setConfirmPassword('');
 	};
+	// const register = (e) => {
+	// 	e.preventDefault();
+	// 	setError('');
+	// 	if (validatePassword()) {
+	// 		// Create a new user with email and password using firebase
+	// 		createUserWithEmailAndPassword(auth, email, password).then(() => {
+	// 			sendEmailVerification(auth.currentUser)
+	// 				.then(() => {
+	// 					setTimeActive(true);
+	// 					history('/verify-email');
+	// 				})
+	// 				.catch((err) => alert(err.message));
+	// 		});
+	// 	}
+	// 	setEmail('');
+	// 	setPassword('');
+	// 	setConfirmPassword('');
+	// };
 
 	return (
 		<div className="img_log	 relative w-full h-screen bg-zinc-900/90">
@@ -79,7 +107,7 @@ export default function Register1() {
 
 				<form
 					className="max-w-[400px] gap-2 w-full opacity-90 mx-auto bg-gray-900 p-5"
-					onSubmit={register}
+					onSubmit={registerWithEmailAndPassword}
 					name="registration_form"
 				>
 					<h2 className="text-4xl font-bold text-center py-4">signup</h2>
@@ -96,7 +124,7 @@ export default function Register1() {
 						</p>
 					</div>
 					<div className="flex flex-col mb-4">
-						<label>Username</label>
+						<label>Email</label>
 						<input
 							className="border relative bg-gray-100 p-2"
 							type="email"
@@ -105,7 +133,7 @@ export default function Register1() {
 							required
 							onChange={(e) => setEmail(e.target.value)}
 						/>
-					</div>
+					</div>{' '}
 					<div className="flex flex-col ">
 						<label>Password</label>
 						<input

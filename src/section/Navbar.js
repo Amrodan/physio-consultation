@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
-import logo41 from '../assets/images/logo41.png';
+// import logo41 from '../assets/images/logo41.png';
 const Navbar = () => {
 	const [ open, setOpen ] = useState(false);
 
@@ -17,7 +17,7 @@ const Navbar = () => {
 	return (
 		<nav className="navbar">
 			<Link to="/" className="nav-logo items-end inline-flex">
-				<img src={logo41} alt="Dr Logo" className="nav-logo h-20" />
+				{/* <img src={logo41} alt="Dr Logo" className="nav-logo h-20" /> */}
 				<h2>Omega PT.</h2>
 			</Link>
 

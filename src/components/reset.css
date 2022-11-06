@@ -1,0 +1,42 @@
+.reset {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.reset__container {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	text-align: center;
+	/* background-color: #dcdcdc; */
+	padding: 20px;
+	width: 50vh;
+	height: 62vh;
+	gap: 31px;
+	background: #1e3239;
+}
+.reset_size {
+	font-size: revert;
+}
+.reset__textBox {
+	padding: 10px;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+.reset__btn {
+	font-size: 18px;
+	margin-bottom: 10px;
+	border: none;
+	border-radius: 9px;
+	color: white;
+
+	background-color: #0e0b0fb5;
+}
+.reset__btn:hover {
+	background-color: #16d2b7;
+}
+.reset div {
+	margin-top: 7px;
+}

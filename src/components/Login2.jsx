@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './forms.css';
-import { signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { auth } from '../components/firebase';
+import {
+	signInWithEmailAndPassword,
+	sendEmailVerification,
+	signInWithPopup,
+	FacebookAuthProvider,
+	GoogleAuthProvider
+} from 'firebase/auth';
+import { auth } from './firebase';
 import { useAuthValue } from '../context/AuthContext';
-import { signInWithPopup, FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { collection, addDoc, getDocs, where, query } from 'firebase/firestore';
+import { db } from './firebase';
 
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
 
- 
 export default function Login2() {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
@@ -18,25 +24,72 @@ export default function Login2() {
 	const [ isChecked, setIsChecked ] = useState(false);
 
 	const history = useNavigate();
-	const signInWithFb = () => {
-		const provider = new FacebookAuthProvider();
-		signInWithPopup(auth, provider)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
+	// const signInWithFb = () => {
+	// 	const provider = new FacebookAuthProvider();
+	// 	signInWithPopup(auth, provider)
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err.message);
+	// 		});
+	// };
+	// const signInWithGoogle = () => {
+	// 	const provider = new GoogleAuthProvider();
+	// 	signInWithPopup(auth, provider)
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err.message);
+	// 		});
+	// };
+	const googleProvider = new GoogleAuthProvider();
+	const signInWithGoogle = async () => {
+		try {
+			const res = await signInWithPopup(auth, googleProvider);
+			const user = res.user;
+			if (user) {
+				history('/profile');
+			}
+			const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+			const docs = await getDocs(q);
+			if (docs.docs.length === 0) {
+				await addDoc(collection(db, 'users'), {
+					uid: user.uid,
+					name: user.displayName,
+					authProvider: 'google',
+					email: user.email
+				});
+			}
+		} catch (err) {
+			console.error(err);
+			alert(err.message);
+		}
 	};
-	const signInWithGoogle = () => {
-		const provider = new GoogleAuthProvider();
-		signInWithPopup(auth, provider)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
+	const facebookProvider = new FacebookAuthProvider();
+	const signInWithFb = async () => {
+		try {
+			const res = await signInWithPopup(auth, facebookProvider);
+			const user = res.user;
+			if (user) {
+				history('/profile');
+			}
+
+			const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+			const docs = await getDocs(q);
+			if (docs.docs.length === 0) {
+				await addDoc(collection(db, 'users'), {
+					uid: user.uid,
+					name: user.displayName,
+					authProvider: 'facebook',
+					email: user.email
+				});
+			}
+		} catch (err) {
+			console.error(err);
+			alert(err.message);
+		}
 	};
 	const handleOnChange = () => {
 		setIsChecked(!isChecked);
@@ -61,10 +114,10 @@ export default function Login2() {
 	};
 
 	return (
-		<div className="img_log	 relative w-full h-screen bg-zinc-900/90">
+		<div className="img_log	 relative  w-full h-screen bg-zinc-900/90">
 			{/* <img className="absolute w-full h-full   mix-blend-overlay" alt="log in" /> */}
 
-			<div className="flex justify-center items-center h-full">
+			<div className="flex justify-center items-center h-screen">
 				<form
 					className="max-w-[400px] gap-2 w-full opacity-90 mx-auto bg-gray-900 p-5"
 					onSubmit={login}
@@ -72,7 +125,7 @@ export default function Login2() {
 				>
 					<h2 className="text-4xl font-bold text-center py-4">Sign In</h2>
 					<div className="flex justify-between py-8">
-						<p className="border shadow-lg hover:shadow-xl px-6 py-2 relative flex items-center">
+						<p className="border shadow-lg hover:shadow-2xl px-6 py-2 relative flex items-center">
 							<button onClick={signInWithFb} className="flex items-center">
 								<AiFillFacebook className="mr-2" /> Facebook
 							</button>
@@ -107,12 +160,15 @@ export default function Login2() {
 					</div>
 					<button
 						type="submit"
-						className="w-full py-3 mt-8 bg-indigo-600 hover:bg-indigo-500 relative text-white"
+						className="w-full rounded-md mt-8 bg-indigo-600 hover:bg-indigo-500 relative text-white"
 					>
 						Sign In
-					</button>
+					</button> 
+					<div>
+						<Link to="/reset">Forgot Password</Link>
+					</div>
 					<p className="flex items-center mt-2 justify-evenly w-40">
-						<input
+						<i  nput
 							className="flex w-4"
 							type="checkbox"
 							id="x"
@@ -121,7 +177,7 @@ export default function Login2() {
 							checked={isChecked}
 							onChange={handleOnChange}
 						/>{' '}
-						<label for="x">Remember Me</label>
+						<label htmlFor="x">Remember Me</label>
 					</p>
 					<p className="text-center mt-8 ">
 						Not a member? <Link to="/signup"> Sign up </Link>now

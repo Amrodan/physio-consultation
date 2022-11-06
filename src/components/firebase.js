@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+
 import { getFirestore, collection } from 'firebase/firestore';
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,9 +11,17 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const colRef = collection(db, 'movies');
 const auth = getAuth(app);
 export { auth };
+export const sendPasswordReset = async (email) => {
+	try {
+		await sendPasswordResetEmail(auth, email);
+		alert('Password reset link sent!');
+	} catch (err) {
+		console.error(err);
+		alert(err.message);
+	}
+};

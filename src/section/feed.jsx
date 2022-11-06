@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useAuthValue } from '../context/AuthContext';
-import { collection, addDoc, onSnapshot, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './../components/firebase';
 
 const Feed = () => {
@@ -36,33 +36,12 @@ const Feed = () => {
 		getUsersPosts();
 	}, []);
 
-	const deleteUser = async (id) => {
+	const deleteUserPost = async (id) => {
 		const userDoc = doc(db, 'list', id);
 		await deleteDoc(userDoc);
 		const update = list.filter((input) => input.id !== id);
 		setList(update);
 	};
-
-	const deleteFunction = (id) => {
-		const update = list.filter((input) => input.id !== id);
-		setList(update);
-	};
-	// function handleSubmit(e) {
-	// 	e.preventDefault();
-
-	// 	const movieCollectionRef = collection(db, 'apointment');
-	// 	const payload = { list, post };
-
-	// 	addDoc(movieCollectionRef, payload)
-	// 		.then((snapshot) => {
-	// 			console.log(snapshot);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err.message);
-	// 		});
-	// 	setList('');
-	// 	setPost('');
-	// }
 
 	function handleChange(event) {
 		event.preventDefault();
@@ -71,14 +50,12 @@ const Feed = () => {
 
 	function handleAdd(event) {
 		event.preventDefault();
-		// console.log(id);
 		if (!post) {
 			return;
 		} else {
 			const newList = list.concat({ post, userId, id, currentUser });
 
 			setList(newList);
-			// console.log(newList);
 			setPost('');
 
 			const movieCollectionRef = collection(db, 'list');
@@ -152,22 +129,29 @@ const Feed = () => {
 									<strong className="text-sm"> people like it</strong>
 								</span>
 							</div> */}
-							<div className="tooltip">
-								<span
-									className=" cursor-pointer"
-									onClick={() =>
-										item.userId === currentUser.uid
-											? deleteUser(item.id)
-											: alert('u can only delete ur post ')}
-									type="button"
-								>
-									<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-										<path d="M0 0h24v24H0z" fill="none" />
-										<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-									</svg>
-									<span className="tooltiptext">Delete Post</span>
-								</span>
-							</div>
+							{item.userId === currentUser.uid && (
+								<div className="tooltip">
+									<span
+										className=" cursor-pointer"
+										onClick={() =>
+											item.userId === currentUser.uid
+												? deleteUserPost(item.id)
+												: alert('u can only delete ur post ')}
+										type="button"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											height="24"
+											viewBox="0 0 24 24"
+											width="24"
+										>
+											<path d="M0 0h24v24H0z" fill="none" />
+											<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+										</svg>
+										<span className="tooltiptext">Delete Post</span>
+									</span>
+								</div>
+							)}
 						</div>
 
 						{/* <button onClick={updateFormData} type="button">

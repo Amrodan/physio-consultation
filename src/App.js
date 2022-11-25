@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Profile, Register1, Login2, VerifyEmail, auth, RequireAuth } from './components/index';
+import { Profile, Register1, Login, VerifyEmail, auth, RequireAuth } from './components/index';
 import { LandingPage, Card, Contact, Footer, Navbar, ApointmentPage, NotAuthNavbar, Feed } from './section/index';
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthProvider } from './context/AuthContext';
@@ -42,7 +42,7 @@ function App() {
 						<Route element={<RequireAuth allowedRoles={[ ROLES.User ]} />}>
 							<Route path="calendar" element={<ApointmentPage />} />
 						</Route>
-						<Route path="/signin" element={<Login2 />} />
+						<Route path="/signin" element={<Login />} />
 						<Route path="/reset" element={<Reset />} />
 						<Route path="/signup" element={<Register1 />} />
 						<Route path="/verify-email" element={<VerifyEmail />} />

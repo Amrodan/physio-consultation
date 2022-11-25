@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
-// import logo41 from '../assets/images/logo41.png';
+import Omega from '../assets/images/Omega.png';
+
+import { useTranslation, Trans } from 'react-i18next';
+
+const lngs = {
+	en: { nativeName: 'English' },
+
+	ar: { nativeName: 'عربي' }
+};
+
 const Navbar = () => {
+	const { t, i18n } = useTranslation();
 	const [ open, setOpen ] = useState(false);
 
 	const handleClick = () => {
@@ -17,8 +27,8 @@ const Navbar = () => {
 	return (
 		<nav className="navbar">
 			<Link to="/" className="nav-logo items-end inline-flex">
-				{/* <img src={logo41} alt="Dr Logo" className="nav-logo h-20" /> */}
-				<h2>Omega PT.</h2>
+				<img src={Omega} alt="Dr Logo" className="nav-logo h-20" />
+				{/* <h2>Omega PT.</h2> */}
 			</Link>
 
 			<div onClick={handleClick} className="nav-icon">
@@ -37,9 +47,25 @@ const Navbar = () => {
 				</li>
 
 				<li className="nav-item">
-					<Link to="/contact" className="nav-link" onClick={closeMenu}>
+					{/* <Link to="/contact" className="nav-link" onClick={closeMenu}>
 						Contact
-					</Link>
+					</Link> */}
+					<div>
+						{Object.keys(lngs).map((lng) => (
+							<button
+								className="nav-link"
+								key={lng}
+								style={{
+									display: i18n.resolvedLanguage === lng ? 'none' : ''
+									// color: i18n.resolvedLanguage === lng ? 'blue' : 'normal'
+								}}
+								type="submit"
+								onClick={() => i18n.changeLanguage(lng)}
+							>
+								<strong>{lngs[lng].nativeName}</strong>
+							</button>
+						))}
+					</div>
 				</li>
 				<li className="nav-item">
 					<Link to="/calendar" className="nav-link" onClick={closeMenu}>
@@ -52,6 +78,13 @@ const Navbar = () => {
 					</Link>
 				</li>
 			</ul>
+
+			{/* <p>
+				<Trans i18nKey="description.part1">Edit src/App.js and save to reload.</Trans>
+			</p>يمكن أن يكون العلاج الطبيعي عبر الإنترنت طريقة ملائمة وفعالة لإدارة الإصابات وتوجيه شفائك.
+			<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+				{t('description.part2')}
+			</a> */}
 		</nav>
 	);
 };

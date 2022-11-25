@@ -56,7 +56,7 @@ export default function Register1() {
 		}
 		return isValid;
 	};
-	const registerWithEmailAndPassword = async (e, name, email, password) => {
+	const registerWithEmailAndPassword = async (e) => {
 		// console.log(e);
 		e.preventDefault();
 		try {
@@ -69,14 +69,14 @@ export default function Register1() {
 				const user = res.user;
 				await addDoc(collection(db, 'users'), {
 					uid: user.uid,
-					name,
+
 					authProvider: 'local',
 					email
 				});
 			}
 		} catch (err) {
 			console.error(err);
-			alert(err.message);
+			setError(err.message.split(' ').slice(1).join(' '));
 		}
 	};
 	// const register = (e) => {
@@ -102,8 +102,8 @@ export default function Register1() {
 		<div className="img_log	 relative w-full h-screen bg-zinc-900/90">
 			{/* <img className="absolute w-full h-full   mix-blend-overlay" alt="log in" /> */}
 
-			<div className="flex justify-center items-center h-full">
-				{error && <div className="auth__error">{error}</div>}
+			<div className="flex justify-center items-center  h-screen">
+				{/* {error && <div className="auth__error">{error}</div>} */}
 
 				<form
 					className="max-w-[400px] gap-2 w-full opacity-90 mx-auto bg-gray-900 p-5"
@@ -155,10 +155,13 @@ export default function Register1() {
 					</div>
 					<button
 						type="submit"
-						className="w-full py-3 mt-8 bg-indigo-600 hover:bg-indigo-500 relative text-white"
+						className="w-full  rounded-md mt-8 bg-indigo-600 hover:bg-indigo-500 relative text-white"
 					>
 						Sign Up
 					</button>
+					<p className="text-red-600">
+						<strong>{error}</strong>{' '}
+					</p>
 					<span className="text-center mt-8 ">
 						Already have an account?
 						<Link to="/signin"> login</Link>

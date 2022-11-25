@@ -18,7 +18,7 @@
 .nav-links {
 	display: grid;
 	grid-template-columns: repeat(5, auto);
-	/* grid-gap: 20px; */
+	grid-gap: 20px;
 	list-style: none;
 }
 
@@ -52,6 +52,8 @@
 		top: 80px;
 		left: -100%;
 		transition: 0.5s all;
+		grid-gap: 0px;
+
 		z-index: 1 !important;
 	}
 
@@ -105,5 +107,10 @@
 @media only screen and (max-width: 900px) {
 	.nav-links.active {
 		z-index: 1;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.nav-links {
+		gap: 0px;
 	}
 }

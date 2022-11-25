@@ -4,10 +4,10 @@
 /* Media queries(small screen) */
 @media screen and (max-width: 660px) {
 	.text-wrapper {
-		font-size: 10px;
-		width: 90%;
+		font-size: 0.8em;
+		width: 55%;
 		position: relative;
-		top: -100px;
+		top: -217px;
 		left: 8px;
 	}
 	.text-wrap {
@@ -43,11 +43,11 @@
 
 @media screen and (max-width: 1024px) and (min-width: 661px) {
 	.text-wrapper {
-		font-size: 10px;
+		font-size: 16px;
 		width: 95%;
 		position: relative;
-		top: -200px;
-		left: 8px;
+		bottom: 100px;
+		left: 28px;
 	}
 	.text-wrap {
 		position: relative;
@@ -76,8 +76,8 @@
 	.text-wrapper {
 		font-size: 10px;
 		bottom: 6%;
-		left: 2rem;
-		top: -172px;
+		/* left: 2rem; */
+		/* top: -172px; */
 	}
 
 	.small {

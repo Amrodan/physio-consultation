@@ -4,7 +4,7 @@
 	box-shadow: 0px 0px 4px hsl(240, 3%, 7%);
 	text-align: center;
 	padding: 40px 20px;
-	background-color: hsl(0, 0%, 0%);
+	background-color: hsl(197deg 100% 22%);
 }
 
 .verifyEmail h1 {
@@ -19,7 +19,21 @@
 .verifyEmail > span {
 	color: gray;
 }
-
+.resend_btn {
+	width: max-content;
+	display: inline-block;
+	color: var(--color-primary);
+	/* padding: 0.75rem 1.2rem; */
+	border-radius: 0.5rem;
+	cursor: pointer;
+	border: 1px solid var(--color-primary);
+	transition: var(--transition);
+}
+.resend_btn:hover {
+	background-color: rgb(147, 204, 147);
+	color: var(--color-bg);
+	border-color: transparent;
+}
 .verifyEmail > button {
 	margin-top: 35px;
 }

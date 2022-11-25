@@ -15,24 +15,18 @@ import { db } from './firebase';
 
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
-import IconButton from '@material-ui/core/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import Input from '@material-ui/core/Input';
-
+import showPwdImg from '../assets/images/show-password.svg';
+import hidePwdImg from '../assets/images/hide-password.svg';
 export default function Login2() {
 	const [ email, setEmail ] = useState('');
-	const [ password ] = useState('');
+	const [ password, setPassword ] = useState('');
 	const [ error, setError ] = useState('');
 	const { setTimeActive } = useAuthValue();
 	const [ isChecked, setIsChecked ] = useState(false);
-	const [ values, setValues ] = useState({
-		password: '',
-		showPassword: false
-	});
+	const [ isRevealPwd, setIsRevealPwd ] = useState(false);
 
 	const history = useNavigate();
+
 	// const signInWithFb = () => {
 	// 	const provider = new FacebookAuthProvider();
 	// 	signInWithPopup(auth, provider)
@@ -43,7 +37,16 @@ export default function Login2() {
 	// 			console.log(err.message);
 	// 		});
 	// };
-
+	// const signInWithGoogle = () => {
+	// 	const provider = new GoogleAuthProvider();
+	// 	signInWithPopup(auth, provider)
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err.message);
+	// 		});
+	// };
 	const googleProvider = new GoogleAuthProvider();
 	const signInWithGoogle = async () => {
 		try {
@@ -63,11 +66,10 @@ export default function Login2() {
 				});
 			}
 		} catch (err) {
-			// console.error(err);
+			console.error(err);
 			setError(err.message.split(' ').slice(1).join(' '));
 		}
 	};
-	// let newError = error.split(' ').slice(1).join(' ');
 	const facebookProvider = new FacebookAuthProvider();
 	const signInWithFb = async () => {
 		try {
@@ -88,40 +90,13 @@ export default function Login2() {
 				});
 			}
 		} catch (err) {
-			// console.error(err);
-			setError(err.message);
+			console.error(err);
+			setError(err.message.split(' ').slice(1).join(' '));
 		}
 	};
 	const handleOnChange = () => {
 		setIsChecked(!isChecked);
 	};
-
-	const handleClickShowPassword = () => {
-		setValues({ ...values, showPassword: !values.showPassword });
-	};
-
-	const handleMouseDownPassword = (event) => {
-		event.preventDefault();
-	};
-
-	const handlePasswordChange = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value });
-	};
-
-	function mapAuthCodeToMessage(message) {
-		switch (message) {
-			case 'Firebase: Error (auth/wrong-password)':
-				return 'Password provided is not corrected';
-
-			case 'Firebase: Error (auth/user-not-found)':
-				return 'Email provided is invalid';
-
-			// Many more authCode mapping here...
-
-			default:
-				return error.split(' ').slice(1).join(' ');
-		}
-	}
 
 	const login = (e) => {
 		e.preventDefault();
@@ -152,10 +127,10 @@ export default function Login2() {
 	};
 
 	return (
-		<div className="img_log	 relative  w-full h-screen  bg-zinc-900/90">
+		<div className="img_log	 relative  w-full h-screen bg-zinc-900/90">
 			{/* <img className="absolute w-full h-full   mix-blend-overlay" alt="log in" /> */}
 
-			<div className="flex justify-center items-center  ">
+			<div className="flex justify-center items-center ">
 				<form
 					className="max-w-[400px] gap-2 w-full opacity-90 mx-auto bg-gray-900 p-5"
 					onSubmit={login}
@@ -175,7 +150,7 @@ export default function Login2() {
 						</p>
 					</div>
 					<div className="flex flex-col mb-4">
-						<label>Email</label>
+						<label>Username</label>
 						<input
 							className="border relative bg-gray-100 p-2"
 							required
@@ -187,29 +162,32 @@ export default function Login2() {
 					</div>
 					<div className="flex flex-col ">
 						<label>Password</label>
-						<Input
-							className="border relative bg-gray-100 p-2"
-							required
-							placeholder="Enter your password"
-							type={values.showPassword ? 'text' : 'password'}
-							onChange={handlePasswordChange('password')}
-							value={values.password}
-							endAdornment={
-								<InputAdornment position="end">
-									<IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
-										{values.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-									</IconButton>
-								</InputAdornment>
-							}
-						/>
+						<div className="pwd-container relative ">
+							{' '}
+							<input
+								className="border relative bg-gray-100 p-2"
+								type={isRevealPwd ? 'text' : 'password'}
+								value={password}
+								required
+								placeholder="Enter your password"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<img
+								className="cursor-pointer absolute top-3 right-3 w-6"
+								title={isRevealPwd ? 'Hide password' : 'Show password'}
+								src={isRevealPwd ? hidePwdImg : showPwdImg}
+								onClick={() => setIsRevealPwd((prevState) => !prevState)}
+								alt=" "
+							/>
+						</div>{' '}
 					</div>
+
 					<button
 						type="submit"
 						className="w-full rounded-md mt-8 bg-indigo-600 hover:bg-indigo-500 relative text-white"
 					>
 						Sign In
 					</button>
-
 					<p className="text-red-600">
 						<strong>{error}</strong>{' '}
 					</p>

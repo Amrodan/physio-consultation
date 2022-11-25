@@ -193,6 +193,7 @@ img {
 	visibility: visible;
 	transition-delay: 0.3s;
 }
+
 /* Media queries(med screen) */
 @media screen and (max-width: 1024px) {
 	.container {
@@ -212,6 +213,12 @@ img {
 	}
 	.nav_open {
 		display: none !important;
+	}
+	.appointment_textFiled_cancel_btn {
+		width: 6rem;
+	}
+	.appointment_textFiled_send_btn {
+		width: 6rem;
 	}
 	.btn_span {
 		left: 62px;

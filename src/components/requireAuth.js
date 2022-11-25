@@ -5,10 +5,10 @@ const RequireAuth = ({ allowedRoles }) => {
 	const { currentUser } = useAuthValue();
 	const location = useLocation();
 
-	return currentUser ? (
+	return currentUser?.emailVerified  ? (
 		<Outlet />
 	) : (
-		// : currentUser?.user
+		//! : currentUser?.user
 		//     ? <Navigate to="/contact" state={{ from: location }} replace />
 		<Navigate to="/signin" state={{ from: location }} replace />
 	);

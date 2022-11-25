@@ -9,13 +9,13 @@ const Feed = () => {
 	const initialList = [
 		{
 			id: 'a',
-			post: 'Robin',
+			post: '',
 			userId: '3frybt7i',
 			currentUser: { currentUser }
 		},
 		{
 			id: 'b',
-			post: 'Dennis',
+			post: '',
 			userId: '3frybt7i',
 			currentUser: { currentUser }
 		}
@@ -26,7 +26,7 @@ const Feed = () => {
 	const usersCollectionRef = collection(db, 'list');
 	const id = uuid();
 	let userId = currentUser.uid;
-
+	let userName = currentUser.displayName;
 	useEffect(() => {
 		const getUsersPosts = async () => {
 			const data = await getDocs(usersCollectionRef);
@@ -53,13 +53,13 @@ const Feed = () => {
 		if (!post) {
 			return;
 		} else {
-			const newList = list.concat({ post, userId, id, currentUser });
+			const newList = list.concat({ post, userId, id, currentUser, userName });
 
 			setList(newList);
 			setPost('');
 
 			const movieCollectionRef = collection(db, 'list');
-			const payload = { id, post, userId };
+			const payload = { id, post, userId, userName };
 
 			addDoc(movieCollectionRef, payload)
 				.then((snapshot) => {
@@ -118,47 +118,50 @@ const Feed = () => {
 				</div>
 			</div>
 			<div>
-				{list.map((item, i) => (
-					<div key={i} className="flex justify-center font-black 	 h-32 p-2.5 text-slate-900 ">
-						<div className="flex bg-slate-100 justify-center p-4 items-center overflow-auto break-words	pl-3  w-10/12  rounded-3xl   border-solid ">
-							<p className="italic break-words ml-4 w-9/12 " key={item.userId}>
-								{item.post}
-							</p>
-							{/* <div className=" float-right w-28">
+				{list
+					.slice() // copy
+					.reverse() // reverse
+					.map((item, i) => (
+						<div key={i} className="flex justify-center font-black 	 h-32 p-2.5 text-slate-900 ">
+							<div className="flex bg-slate-100 justify-center p-4 items-center overflow-auto break-words	pl-3  w-10/12  rounded-3xl   border-solid ">
+								<p className="italic break-words ml-4 w-9/12 " key={item.userId}>
+									{item.post}
+								</p>
+								{/* <div className=" float-right w-28">
 								<span>
 									<strong className="text-sm"> people like it</strong>
 								</span>
 							</div> */}
-							{item.userId === currentUser.uid && (
-								<div className="tooltip">
-									<span
-										className=" cursor-pointer"
-										onClick={() =>
-											item.userId === currentUser.uid
-												? deleteUserPost(item.id)
-												: alert('u can only delete ur post ')}
-										type="button"
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											height="24"
-											viewBox="0 0 24 24"
-											width="24"
+								{item.userId === currentUser.uid && (
+									<div className="tooltip">
+										<span
+											className=" cursor-pointer"
+											onClick={() =>
+												item.userId === currentUser.uid
+													? deleteUserPost(item.id)
+													: alert('u can only delete ur post ')}
+											type="button"
 										>
-											<path d="M0 0h24v24H0z" fill="none" />
-											<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-										</svg>
-										<span className="tooltiptext">Delete Post</span>
-									</span>
-								</div>
-							)}
-						</div>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												height="24"
+												viewBox="0 0 24 24"
+												width="24"
+											>
+												<path d="M0 0h24v24H0z" fill="none" />
+												<path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+											</svg>
+											<span className="tooltiptext">Delete Post</span>
+										</span>
+									</div>
+								)}
+							</div>
 
-						{/* <button onClick={updateFormData} type="button">
+							{/* <button onClick={updateFormData} type="button">
 							update this specific input
 						</button> */}
-					</div>
-				))}
+						</div>
+					))}
 			</div>
 		</div>
 	);

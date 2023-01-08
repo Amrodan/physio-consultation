@@ -82,63 +82,125 @@ function TextWrapper() {
 			<div className="text-center    ">
 				<p className="m-4">
 					{' '}
-					A physiotherapist can treat you if you have a problem with pain or movement. Physiotherapy could
-					help you become more mobile and make you more comfortable.
+					<Trans i18nKey="description.part7">
+						A physiotherapist can treat you if you have a problem with pain or movement. Physiotherapy could
+						help you become more mobile and make you more comfortable.
+					</Trans>
 				</p>
 			</div>
 
 			<div className="m-4">
-				<h1 className="text-amber-500 text-2xl m-4">What is physiotherapy?</h1>
+				<h1 className="text-amber-500 text-2xl m-4">
+					<Trans i18nKey="description.part31">What is physiotherapy?</Trans>
+				</h1>
 				<p className="m-4">
 					{' '}
-					Physiotherapy uses physical techniques to improve movement, reduce pain and stiffness, speed up the
-					healing process and increase quality of life.{' '}
+					<Trans i18nKey="description.part8">
+						Physiotherapy uses physical techniques to improve movement, reduce pain and stiffness, speed up
+						the healing process and increase quality of life.{' '}
+					</Trans>
 				</p>
-				<h1 className="text-amber-500 text-2xl m-4	"> What does a physiotherapist do?</h1>
+				<h1 className="text-amber-500 text-2xl m-4	">
+					<Trans i18nKey="description.part30"> What does a physiotherapist do?</Trans>
+				</h1>
 				<p className="m-4">
 					{' '}
-					Physiotherapists diagnose and manage a broad range of conditions with the bones, muscles,
-					cardiovascular system, nerves and other parts and systems of the body. They can help people to
-					manage chronic diseases, give lifestyle advice, prescribe exercises and aids to help people manage
-					better, and give advice. When you go to see a physiotherapist, they might :{' '}
+					<Trans i18nKey="description.part9">
+						Physiotherapists diagnose and manage a broad range of conditions with the bones, muscles,
+						cardiovascular system, nerves and other parts and systems of the body. They can help people to
+						manage chronic diseases, give lifestyle advice, prescribe exercises and aids to help people
+						manage better, and give advice. When you go to see a physiotherapist, they might :{' '}
+					</Trans>
 				</p>
 				<ul>
-					<li className="list-disc m-8 small-line	">massage areas of your body </li>
-					<li className="list-disc m-8 small-line	">manipulate your joints </li>
-					<li className="list-disc m-8 small-line	"> stretch your muscles</li>
-					<li className="list-disc m-8 small-line	">give you exercises to do</li>
+					<li className="list-disc m-8 small-line	">
+						<Trans i18nKey="description.part10">massage areas of your body</Trans>{' '}
+					</li>
+					<li className="list-disc m-8 small-line	">
+						<Trans i18nKey="description.part11">manipulate your joints</Trans>{' '}
+					</li>
+					<li className="list-disc m-8 small-line	">
+						{' '}
+						<Trans i18nKey="description.part12">stretch your muscles</Trans>
+					</li>
+					<li className="list-disc m-8 small-line	">
+						<Trans i18nKey="description.part13">give you exercises to do</Trans>
+					</li>
 				</ul>
 				<p className="m-4">
 					{' '}
-					A physiotherapist will assess your condition and help you with physical problems.
+					<Trans i18nKey="description.part14">
+						A physiotherapist will assess your condition and help you with physical problems.
+					</Trans>
 				</p>
 				<p className="m-4">
-					These might have come about because of an accident or injury, or you might have had them most of
-					your life. Some physiotherapists treat children who have problems with their movement. They also
-					show parents how to improve their child’s quality of life.
+					<Trans i18nKey="description.part15">
+						These might have come about because of an accident or injury, or you might have had them most of
+						your life. Some physiotherapists treat children who have problems with their movement. They also
+						show parents how to improve their child’s quality of life.
+					</Trans>
 				</p>
-				<h1 className="text-amber-500 text-2xl m-4	"> How can physiotherapy help me?</h1>
-				<p className="m-4"> A physiotherapist can help treat many things, including : </p>
+				<h1 className="text-amber-500 text-2xl m-4	">
+					{' '}
+					<Trans i18nKey="description.part16">How can physiotherapy help me?</Trans>
+				</h1>
+				<p className="m-4">
+					<Trans i18nKey="description.part17">
+						{' '}
+						A physiotherapist can help treat many things, including :
+					</Trans>{' '}
+				</p>
 				<ul className="list-disc m-4 small-line	">
-					<li className="list-disc m-8 small-line	">back and knee pain</li>
-					<li className="list-disc m-8 small-line "> sports injuries </li>
-					<li className="list-disc m-8 small-line">arthritis </li>
-					<li className="list-disc m-8 small-line"> aches, sprains and injuries</li>
+					<li className="list-disc m-8 small-line	">
+						<Trans i18nKey="description.part18">back and knee pain</Trans>
+					</li>
 					<li className="list-disc m-8 small-line ">
 						{' '}
-						incontinence neurological conditions, like Parkinson’s disease or multiple sclerosis
+						<Trans i18nKey="description.part19">sports injuries </Trans>
+					</li>
+					<li className="list-disc m-8 small-line">
+						<Trans i18nKey="description.part20">arthritis</Trans>{' '}
+					</li>
+					<li className="list-disc m-8 small-line">
+						{' '}
+						<Trans i18nKey="description.part21">aches, sprains and injuries</Trans>
+					</li>
+					<li className="list-disc m-8 small-line ">
+						{' '}
+						<Trans i18nKey="description.part22">
+							incontinence neurological conditions, like Parkinson’s disease or multiple sclerosis
+						</Trans>
 					</li>
 					<li className="list-disc m-8 ">
 						{' '}
-						chronic diseases like diabetes, osteoarthritis, osteoporosis and obesity
+						<Trans i18nKey="description.part23">
+							chronic diseases like diabetes, osteoarthritis, osteoporosis and obesity
+						</Trans>
 					</li>
-					<li className="list-disc m-8 "> managing after a stroke</li>{' '}
-					<li className="list-disc m-8 "> recovery from broken bones</li>{' '}
-					<li className="list-disc m-8 ">rehabilitation after surgery </li>
-					<li className="list-disc m-8 ">developmental delays in children</li>
-					<li className="list-disc m-8 ">occupational health</li>
+					<li className="list-disc m-8 ">
+						{' '}
+						<Trans i18nKey="description.part24">managing after a stroke</Trans>
+					</li>{' '}
+					<li className="list-disc m-8 ">
+						{' '}
+						<Trans i18nKey="description.part25">recovery from broken bones</Trans>
+					</li>{' '}
+					<li className="list-disc m-8 ">
+						<Trans i18nKey="description.part26">rehabilitation after surgery </Trans>
+					</li>
+					<li className="list-disc m-8 ">
+						<Trans i18nKey="description.part27">developmental delays in children</Trans>
+					</li>
+					<li className="list-disc m-8 ">
+						<Trans i18nKey="description.part28">occupational health</Trans>
+					</li>
 				</ul>
-				<p className="m-4"> They can also help you reduce the chance of future injuries.</p>
+				<p className="m-4">
+					<Trans i18nKey="description.part29">
+						{' '}
+						They can also help you reduce the chance of future injuries.
+					</Trans>
+				</p>
 				<h1 className="text-amber-500 text-2xl m-4	"> Am I eligible for physiotherapy?</h1>{' '}
 				<p className="m-4">
 					Yes, you can see a physiotherapist at any time. You don’t have to see your doctor before you see a

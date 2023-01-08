@@ -76,6 +76,11 @@ const AppointmentDialog = (props) => {
 				.catch((err) => {
 					console.log(err.message);
 				});
+			setName('');
+			setEmail('');
+			setPhone('');
+			setDate('');
+			setOpen(false);
 		}
 	}
 

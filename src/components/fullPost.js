@@ -118,7 +118,7 @@ function Post(props) {
 					</div>
 				))}
 			</div>
-			<button className=" reply   " onClick={toggleReplyForm}>
+			<button className=" reply rounded-lg  " onClick={toggleReplyForm}>
 				Reply
 			</button>
 			{showReplyForm && (
@@ -131,7 +131,7 @@ function Post(props) {
 						name="comment"
 						className="w-7/12 break-words "
 					/>
-					<button type="submit" className="button">
+					<button type="submit" className="button rounded-lg">
 						Submit
 					</button>
 				</form>

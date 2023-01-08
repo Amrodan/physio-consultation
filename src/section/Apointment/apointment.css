@@ -21,6 +21,22 @@
 	background-image: linear-gradient(to right, #18d3af, #0fcfcb);
 	color: white;
 }
+
+table {
+	width: 800px;
+	height: 200px;
+	border-collapse: collapse;
+}
+
+th {
+	border-bottom: 1px solid black;
+	border: 2px solid black;
+}
+
+td {
+	text-align: center;
+	border: 2px solid black;
+}
 @media screen and (max-width: 700px) {
 	.appointment_textFiled_cancel_btn {
 		width: 5.5rem;

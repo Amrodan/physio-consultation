@@ -48,23 +48,21 @@ const NotAuthNavbar = () => {
 					</Link>
 				</li>
 
-				<li className="nav-item">
-					<div>
-						{Object.keys(lngs).map((lng) => (
-							<button
-								className="nav-link"
-								key={lng}
-								style={{
-									display: i18n.resolvedLanguage === lng ? 'none' : ''
-									// color: i18n.resolvedLanguage === lng ? 'blue' : 'normal'
-								}}
-								type="submit"
-								onClick={() => i18n.changeLanguage(lng)}
-							>
-								<strong>{lngs[lng].nativeName}</strong>
-							</button>
-						))}
-					</div>
+				<li className="nav-item cursor-pointer">
+					{Object.keys(lngs).map((lng) => (
+						<span
+							className="nav-link"
+							key={lng}
+							style={{
+								display: i18n.resolvedLanguage === lng ? 'none' : ''
+								// color: i18n.resolvedLanguage === lng ? 'blue' : 'normal'
+							}}
+							type="submit"
+							onClick={() => i18n.changeLanguage(lng)}
+						>
+							{lngs[lng].nativeName}
+						</span>
+					))}
 				</li>
 
 				<li className="nav-item">

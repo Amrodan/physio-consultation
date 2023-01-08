@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import EnhancedTable from './table';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
@@ -39,7 +39,7 @@ const CalendarContainer = styled.div`
 		border: 0;
 		border-radius: 3px;
 		color: white;
-		padding: 5px 0;
+		padding: 7px 0;
 		&:hover {
 			background-color: #16d2b7;
 		}
@@ -90,8 +90,7 @@ const CalendarContainer = styled.div`
 const AppointmentPage = () => {
 	const [ Value, SetValue ] = useState(new Date());
 	const [ AppInfo, SetAppInfo ] = useState({
-		key: '',
-		title: '',
+		date: Value,
 		time: ''
 	});
 	const [ open, setOpen ] = useState(false);
@@ -134,9 +133,12 @@ const AppointmentPage = () => {
 									<button
 										onClick={() => {
 											SetAppInfo({
-												key: 'F06',
-												title: 'Pediatrie',
+												// key: 'F09',
+												// title: 'Pediatrie',
+												date: Value.toLocaleDateString(),
+
 												time: '8:00 AM - 9:00 AM'
+												// date: Date
 											});
 											handleClickOpen();
 										}}
@@ -155,8 +157,10 @@ const AppointmentPage = () => {
 									<button
 										onClick={() => {
 											SetAppInfo({
-												key: 'F06',
-												title: 'Pediatrie',
+												// key: 'F010',
+												// title: 'Pediatrie',
+												date: Value.toLocaleDateString(),
+
 												time: '9:00 AM - 10:00 AM'
 											});
 											handleClickOpen();
@@ -176,8 +180,11 @@ const AppointmentPage = () => {
 									<button
 										onClick={() => {
 											SetAppInfo({
-												key: 'F06',
-												title: 'Pediatrie',
+												// key: 'F12',
+												// title: 'Pediatrie',
+
+												date: Value.toLocaleDateString(),
+
 												time: '11:00 AM - 12:00 AM'
 											});
 											handleClickOpen();
@@ -197,8 +204,10 @@ const AppointmentPage = () => {
 									<button
 										onClick={() => {
 											SetAppInfo({
-												key: 'F06',
-												title: 'Pediatrie',
+												// key: 'F02',
+												date: Value.toLocaleDateString(),
+
+												// title: 'Pediatrie',
 												time: '1:00 PM - 2:00 PM'
 											});
 											handleClickOpen();
@@ -218,8 +227,10 @@ const AppointmentPage = () => {
 									<button
 										onClick={() => {
 											SetAppInfo({
-												key: 'F06',
-												title: 'Pediatrie',
+												// key: 'F04',
+												// title: 'Pediatrie',
+												date: Value.toLocaleDateString(),
+
 												time: '3:00 PM - 4:00 PM'
 											});
 											handleClickOpen();
@@ -239,8 +250,9 @@ const AppointmentPage = () => {
 									<button
 										onClick={() => {
 											SetAppInfo({
-												key: 'F06',
-												title: 'Pediatrie',
+												// key: 'F05',
+												// title: 'Pediatrie'
+												date: Value.toLocaleDateString(),
 												time: '4:00 PM - 5:00 PM'
 											});
 											handleClickOpen();
@@ -252,6 +264,7 @@ const AppointmentPage = () => {
 								</div>
 							</div>
 						</div>
+						{/* <EnhancedTable /> */}
 						<AppointmentDialog
 							openDialog={open}
 							SetDialog={setOpen}

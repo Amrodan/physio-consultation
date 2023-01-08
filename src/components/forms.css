@@ -5,7 +5,74 @@
 	padding: 20px;
 	text-align: center;
 }
+.button {
+	display: inline-block;
+	border-radius: 3px;
+	/* padding: 0.5rem 0; */
+	/* margin: 0.5rem 1rem; */
+	width: 7rem;
+	background: transparent;
+	color: rgb(255, 255, 255);
+	border: 2px solid white;
+	transition: 0.5s all ease-out;
+}
 
+.button:hover {
+	background-color: rgb(19, 100, 66);
+	color: black;
+}
+.reply {
+	border: 2px solid white;
+	width: 7rem;
+	margin: auto;
+}
+.reply:hover {
+	border: 2px solid white;
+	background-color: rgb(19, 100, 66);
+	color: black;
+}
+.btn_hover:hover {
+	background-color: rgb(19, 100, 66);
+	color: black;
+	border: 2px solid white;
+}
+.reply-container {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 16px;
+
+	background: lightgrey;
+	margin: auto;
+
+	width: 59%;
+}
+
+.btn_reply {
+	margin-inline: auto;
+	display: flex;
+}
+.reply-form {
+	display: flex;
+	align-items: center;
+}
+.reply_input {
+	width: 60%;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background: transparent;
+	border: 2px solid cadetblue;
+	/* resize: none; */
+	/* color: cadetblue; */
+}
+.message {
+	display: inline-block;
+	background-color: steelblue;
+	border-radius: 10px;
+	padding: 20px;
+	max-width: 90%;
+	margin: 10px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
 .auth form {
 	display: flex;
 	flex-direction: column;

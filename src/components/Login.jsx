@@ -66,7 +66,7 @@ export default function Login2() {
 				});
 			}
 		} catch (err) {
-			console.error(err);
+			// console.error(err);
 			setError(err.message.split(' ').slice(1).join(' '));
 		}
 	};

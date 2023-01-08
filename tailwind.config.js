@@ -16,6 +16,10 @@ module.exports = {
 				darkseagreen: ' #8fbc8f',
 				danger: '#e3342f',
 				yellow_10: '#E9C46A'
+			}),
+
+			lineHeight: (theme) => ({
+				'small-line': '0.4'
 			})
 		},
 		maxWidth: {

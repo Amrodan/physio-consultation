@@ -4,30 +4,26 @@ import { useAuthValue } from '../context/AuthContext';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './../components/firebase';
 
-const Feed = () => {
+import { useNavigate } from 'react-router-dom';
+const Feed = (props) => {
 	const { currentUser } = useAuthValue();
-	const initialList = [
-		{
-			id: 'a',
-			post: '',
-			userId: '3frybt7i',
-			currentUser: { currentUser }
-		},
-		{
-			id: 'b',
-			post: '',
-			userId: '3frybt7i',
-			currentUser: { currentUser }
-		}
-	];
-
-	const [ list, setList ] = useState(initialList);
+	const navigate = useNavigate();
 	const [ post, setPost ] = useState('');
+
+	const handleClick = (post) => {
+		// history.push(`/posts/${post}`);
+		navigate(`/posts/${post}`);
+		// console.log(id);
+	};
 	const usersCollectionRef = collection(db, 'list');
 	const id = uuid();
 	let userId = currentUser.uid;
 	let userName = currentUser.displayName;
+	const { list } = props;
+	const { setList } = props;
+
 	useEffect(() => {
+		// console.log(list);
 		const getUsersPosts = async () => {
 			const data = await getDocs(usersCollectionRef);
 			setList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -39,7 +35,7 @@ const Feed = () => {
 	const deleteUserPost = async (id) => {
 		const userDoc = doc(db, 'list', id);
 		await deleteDoc(userDoc);
-		const update = list.filter((input) => input.id !== id);
+		const update = props.list.filter((input) => input.id !== id);
 		setList(update);
 	};
 
@@ -53,7 +49,7 @@ const Feed = () => {
 		if (!post) {
 			return;
 		} else {
-			const newList = list.concat({ post, userId, id, currentUser, userName });
+			const newList = props.list.concat({ post, userId, id, currentUser, userName });
 
 			setList(newList);
 			setPost('');
@@ -68,24 +64,10 @@ const Feed = () => {
 				.catch((err) => {
 					console.log(err.message);
 				});
-			// setList('');
-			// setPost('');
+
+			setPost('');
 		}
 	}
-	// const updateFormData = (id, value) => {
-	// 	console.log(value);
-	// 	const update = list.map((input) => {
-	// 		if (input.id === id) {
-	// 			return {
-	// 				...input,
-	// 				value
-	// 			};
-	// 		}
-	// 		return input;
-	// 	});
-
-	// 	setList(update);
-	// };
 
 	return (
 		<div>
@@ -118,20 +100,18 @@ const Feed = () => {
 				</div>
 			</div>
 			<div>
-				{list
-					.slice() // copy
-					.reverse() // reverse
-					.map((item, i) => (
-						<div key={i} className="flex justify-center font-black 	 h-32 p-2.5 text-slate-900 ">
-							<div className="flex bg-slate-100 justify-center p-4 items-center overflow-auto break-words	pl-3  w-10/12  rounded-3xl   border-solid ">
-								<p className="italic break-words ml-4 w-9/12 " key={item.userId}>
-									{item.post}
-								</p>
-								{/* <div className=" float-right w-28">
-								<span>
-									<strong className="text-sm"> people like it</strong>
-								</span>
-							</div> */}
+				{list &&
+					list.slice().reverse().map((item, i) => (
+						<div key={i} className="flex justify-center   font-black 	 h-24 p-2.5 text-slate-900 ">
+							<div className="flex bg-slate-100 hover:bg-slate-500 cursor-pointer justify-center p-4 items-center overflow-auto break-words	pl-3  w-10/12  rounded-3xl   border-solid ">
+								<div
+									className="italic break-words h-full  ml-4 w-10/12 "
+									key={item.userId}
+									onClick={() => handleClick(item.id)}
+								>
+									{item.post && item.post.substring(0, 100)}...
+								</div>
+
 								{item.userId === currentUser.uid && (
 									<div className="tooltip">
 										<span
@@ -167,8 +147,6 @@ const Feed = () => {
 	);
 };
 
-// export default Test;
-//
 // {posts.map((item, index) => (
 // 	<div key={index} className="flex justify-center h-32 p-2.5 text-slate-400 ">
 // 		<div className="flex bg-slate-100 justify-center p-4 items-center overflow-auto break-words	pl-3  w-10/12  rounded-3xl   border-solid ">

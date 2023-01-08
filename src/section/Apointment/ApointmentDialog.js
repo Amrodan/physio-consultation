@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-import { collection, addDoc } from 'firebase/firestore';
+// import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from '../../components/firebase';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,27 +36,49 @@ const AppointmentDialog = (props) => {
 	const [ email, setEmail ] = useState('');
 	const [ phone, setPhone ] = useState('');
 	const [ date, setDate ] = useState('');
+	const [ list, setList ] = useState([]);
+	const [ error, setError ] = useState('');
+	const usersCollectionRef = collection(db, 'bookedtime');
 
-	function handleSubmit(e) {
+	useEffect(() => {
+		const getUsersPosts = async () => {
+			const data = await getDocs(usersCollectionRef);
+			setList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		};
+
+		getUsersPosts();
+	}, []);
+
+	const deleteUserPost = async (id) => {
+		const userDoc = doc(db, 'bookedtime', id);
+		await deleteDoc(userDoc);
+		const update = list.filter((input) => input.id !== id);
+		setList(update);
+	};
+
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		const movieCollectionRef = collection(db, 'apointment');
-		const payload = { name: name, phone: phone, email: email, time: AppInfo, date: date };
+		const appointmentCollectionRef = collection(db, 'bookedtime');
+		const payload = { key: name, name: name, phone: phone, email: email, time: AppInfo, date: date };
 
-		addDoc(movieCollectionRef, payload)
-			.then((snapshot) => {
-				console.log(snapshot);
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
-		setName('');
-		setDate('');
-		setEmail('');
-		setPhone('');
+		const queri = query(appointmentCollectionRef, where('date', '==', date), where('time', '==', AppInfo));
 
-		setOpen(false);
+		const querySnapshot = await getDocs(queri);
+
+		if (querySnapshot.size > 0) {
+			setError('Sorry, the appointment you selected is not available. Please choose a different time.');
+		} else {
+			addDoc(appointmentCollectionRef, payload)
+				.then((snapshot) => {
+					console.log(snapshot);
+				})
+				.catch((err) => {
+					console.log(err.message);
+				});
+		}
 	}
+
 	const setOpen = props.SetDialog;
 	const open = props.openDialog;
 	const AppInfo = props.AppInformation;
@@ -109,6 +132,7 @@ const AppointmentDialog = (props) => {
 	const handleClose = () => {
 		setOpen(false);
 	};
+	// const apointment = async () => {};
 
 	// const HandleSubmitForm = (e) => {
 	// 	const Time = document.getElementById('time').value;
@@ -144,8 +168,44 @@ const AppointmentDialog = (props) => {
 	// 	e.target.reset();
 	// 	e.preventDefault();
 	// };
+
 	return (
 		<div>
+			<br />
+			{
+				//* only admin
+			}{' '}
+			<div className="flex justify-center">
+				<table className="w-8/12 border-collapse h-80		">
+					<thead>
+						<tr>
+							<th className="border-solid border-2 border-b		">Name</th>
+							<th className="border-solid border-2 h-3/5border-b	">Email</th>
+							<th className="border-solid border-2 border-b	">Date</th>
+							<th className="border-solid border-2 border-b	">Time</th>
+							<th className="border-solid border-2 border-b	">remove</th>
+						</tr>
+					</thead>
+					{list.map((val, key) => {
+						return (
+							<tbody key={key}>
+								<tr className="border-2 border-b border-solid	">
+									<td className=" text-center  border-solid	">{val.name}</td>
+									<td className=" text-center  border-solid	">{val.email}</td>
+									<td className=" text-center  border-solid	">{val.date}</td>
+									<td className=" text-center  border-solid	">{val.time.time}</td>
+									<td
+										onClick={() => deleteUserPost(val.id)}
+										className=" text-center cursor-grab	hover:bg-danger border-solid	"
+									>
+										X
+									</td>
+								</tr>
+							</tbody>
+						);
+					})}
+				</table>
+			</div>
 			<div>
 				<Dialog
 					open={open}
@@ -204,8 +264,9 @@ const AppointmentDialog = (props) => {
 								variant="outlined"
 								value={date}
 								onChange={(e) => setDate(e.target.value)}
+								onClick={(e) => setError('')}
 								type="date"
-								defaultValue={DefaultValue}
+								// defaultValue={DefaultValue}
 								InputProps={{ inputProps: { min: DisabledPast } }}
 								fullWidth
 								required
@@ -218,11 +279,12 @@ const AppointmentDialog = (props) => {
 								>
 									Cancel
 								</button>
+								<p className="text-red-600 ml-6">{error}</p>
 								<input
 									type="submit"
 									value="Submit"
-									className="appointment_textFiled_send_btn cursor-pointer w-28 p-2.5	hover:bg-cyan-600	"
-								/>
+									className="appointment_textFiled_send_btn cursor-pointer w-28 p-2.5	hover:bg-cyan-600 border-sky-700 text-cyan-500	 border-solid		"
+								/>{' '}
 							</div>
 						</form>
 					</DialogContent>

@@ -26,7 +26,7 @@ function Profile() {
 	// 		console.log(err.message);
 	// 	});
   const {currentUser} = useAuthValue()
-  console.log(currentUser)
+  // console.log(currentUser)
 let history = useNavigate()
   return (
     <div className='justify-center flex m-8'>

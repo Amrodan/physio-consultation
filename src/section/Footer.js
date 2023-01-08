@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/footer.css';
-import { BsLinkedin } from 'react-icons/bs';
-import { IoLogoTwitter } from 'react-icons/io';
+import { BsLinkedin, BsWhatsapp } from 'react-icons/bs';
 
 const Footer = () => {
 	return (
@@ -33,8 +32,13 @@ const Footer = () => {
 				<a href="https://linkedin.com/in/alaa-kanj-4a4426199" rel="noreferrer" target="_blank">
 					<BsLinkedin />
 				</a>
-				<a href="https://www.linkedin.com/in/alaa-kanj-4a4426199/" rel="noreferrer" target="_blank">
-					<IoLogoTwitter />
+				<a
+					href="https://api.whatsapp.com/send?phone=96176399205"
+					rel="noreferrer"
+					target="_blank"
+					className="btn_social"
+				>
+					<BsWhatsapp />
 				</a>
 			</div>
 			<div className="footer__copyright">

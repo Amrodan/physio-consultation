@@ -85,7 +85,8 @@ a {
 	display: none;
 }
 .btn :hover {
-	background: var(--color-white);
+	/* background: var(--color-white); */
+	background-color: #16d2b7;
 	color: var(--color-bg);
 	border-color: transparent;
 }
@@ -161,7 +162,8 @@ img {
 	cursor: pointer;
 }
 .sendBtn:hover {
-	background-color: rgb(129, 201, 129);
+	/* background-color: rgb(129, 201, 129); */
+	background-color: #16d2b7;
 }
 
 .tooltip {

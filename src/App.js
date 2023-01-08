@@ -6,14 +6,30 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { AuthProvider } from './context/AuthContext';
 // import ProtectedRoute from './components/protectedRoutes';
 import Reset from './components/reset';
+import Post from './components/fullPost';
 
 function App() {
 	const [ currentUser, setCurrentUser ] = useState(null);
 	const [ timeActive, setTimeActive ] = useState(false);
+	const initialList = [
+		{
+			id: 'a',
+			post: '',
+			userId: '3frybt7i',
+			currentUser: { currentUser }
+		},
+		{
+			id: 'b',
+			post: '',
+			userId: '3frybt7i',
+			currentUser: { currentUser }
+		}
+	];
+	const [ list, setList ] = useState([ initialList ]);
 
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
-			console.log(user);
+			// console.log(user);
 			setCurrentUser(user);
 		});
 	}, []);
@@ -22,7 +38,10 @@ function App() {
 		Editor: 1984,
 		Admin: 5150
 	};
-
+	// const findById = (arr, id) => {
+	// 	return arr.find((element) => element.id === id);
+	// };
+	// const element = findById(list, 1);
 	return (
 		<Router>
 			<div>
@@ -34,7 +53,12 @@ function App() {
 						<Route element={<RequireAuth />}>
 							<Route path="about" element={<Card />} />
 							<Route path="profile" element={<Profile />} />
-							<Route path={'/newsFeed'} element={<Feed />} />
+
+							<Route path={'/newsFeed'} element={<Feed list={list} setList={setList} />} />
+							<Route
+								path="posts/:id"
+								element={<Post element={ROLES.User} list={list} setList={setList} />}
+							/>
 						</Route>
 
 						<Route path={'/contact'} element={<Contact />} />

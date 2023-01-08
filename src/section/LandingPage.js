@@ -14,7 +14,7 @@ function LandingPage() {
 						<img src={run} alt="logo" />
 					</picture>
 					<span className="btn_span top-auto bottom-1  left-1/3 align-text-top absolute  ">
-						<button className="bg-gray-800	 hover:bg-sky-900	 text-white font-bold   rounded">
+						<button className="bg-gray-800 	 hover:bg-sky-900	 text-white font-bold   rounded">
 							<Link to="/newsFeed">
 								<Trans i18nKey="description.part6">Join Our Discussion Group</Trans>
 							</Link>
@@ -54,6 +54,7 @@ function LandingPage() {
 					</div>
 				</div>
 			</div>
+
 			<TextWrapper />
 		</div>
 	);
@@ -78,6 +79,81 @@ function TextWrapper() {
 					</Trans>
 				</article>
 			</section>
+			<div className="text-center    ">
+				<p className="m-4">
+					{' '}
+					A physiotherapist can treat you if you have a problem with pain or movement. Physiotherapy could
+					help you become more mobile and make you more comfortable.
+				</p>
+			</div>
+
+			<div className="m-4">
+				<h1 className="text-amber-500 text-2xl m-4">What is physiotherapy?</h1>
+				<p className="m-4">
+					{' '}
+					Physiotherapy uses physical techniques to improve movement, reduce pain and stiffness, speed up the
+					healing process and increase quality of life.{' '}
+				</p>
+				<h1 className="text-amber-500 text-2xl m-4	"> What does a physiotherapist do?</h1>
+				<p className="m-4">
+					{' '}
+					Physiotherapists diagnose and manage a broad range of conditions with the bones, muscles,
+					cardiovascular system, nerves and other parts and systems of the body. They can help people to
+					manage chronic diseases, give lifestyle advice, prescribe exercises and aids to help people manage
+					better, and give advice. When you go to see a physiotherapist, they might :{' '}
+				</p>
+				<ul>
+					<li className="list-disc m-8 small-line	">massage areas of your body </li>
+					<li className="list-disc m-8 small-line	">manipulate your joints </li>
+					<li className="list-disc m-8 small-line	"> stretch your muscles</li>
+					<li className="list-disc m-8 small-line	">give you exercises to do</li>
+				</ul>
+				<p className="m-4">
+					{' '}
+					A physiotherapist will assess your condition and help you with physical problems.
+				</p>
+				<p className="m-4">
+					These might have come about because of an accident or injury, or you might have had them most of
+					your life. Some physiotherapists treat children who have problems with their movement. They also
+					show parents how to improve their child’s quality of life.
+				</p>
+				<h1 className="text-amber-500 text-2xl m-4	"> How can physiotherapy help me?</h1>
+				<p className="m-4"> A physiotherapist can help treat many things, including : </p>
+				<ul className="list-disc m-4 small-line	">
+					<li className="list-disc m-8 small-line	">back and knee pain</li>
+					<li className="list-disc m-8 small-line "> sports injuries </li>
+					<li className="list-disc m-8 small-line">arthritis </li>
+					<li className="list-disc m-8 small-line"> aches, sprains and injuries</li>
+					<li className="list-disc m-8 small-line ">
+						{' '}
+						incontinence neurological conditions, like Parkinson’s disease or multiple sclerosis
+					</li>
+					<li className="list-disc m-8 ">
+						{' '}
+						chronic diseases like diabetes, osteoarthritis, osteoporosis and obesity
+					</li>
+					<li className="list-disc m-8 "> managing after a stroke</li>{' '}
+					<li className="list-disc m-8 "> recovery from broken bones</li>{' '}
+					<li className="list-disc m-8 ">rehabilitation after surgery </li>
+					<li className="list-disc m-8 ">developmental delays in children</li>
+					<li className="list-disc m-8 ">occupational health</li>
+				</ul>
+				<p className="m-4"> They can also help you reduce the chance of future injuries.</p>
+				<h1 className="text-amber-500 text-2xl m-4	"> Am I eligible for physiotherapy?</h1>{' '}
+				<p className="m-4">
+					Yes, you can see a physiotherapist at any time. You don’t have to see your doctor before you see a
+					physiotherapist. However, it is good to see your doctor to talk about options and to get a referral.
+					Tell your physiotherapist about any major health problems, past injuries, and how much exercise you
+					do. To find one, ask a friend. Ask your doctor. Or search for physiotherapists online through the
+					healthdirect service finder.
+				</p>{' '}
+				<h1 className="text-amber-500 text-2xl m-4	"> Cost of physiotherapy </h1>{' '}
+				<p className="m-4">
+					Costs vary — check before you go. Medicare covers some visits, but only if your doctor has referred
+					you. If you have private health insurance, it might cover physiotherapy. Check what your plan covers
+					before you go.
+				</p>
+			</div>
 			<section className="utube flex justify-center relative p-12">
 				<iframe
 					className="m-8"

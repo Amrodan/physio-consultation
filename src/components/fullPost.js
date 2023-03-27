@@ -145,7 +145,10 @@ function Post(props) {
 			<div className="justify-center flex">
 				<a href="/">
 					<button
-						onClick={() => navigate(-1)}
+						onClick={(e) => {
+							e.preventDefault();
+							navigate(-1);
+						}}
 						className="  rounded-lg hover:bg-red-700 hover:text-white border-solid border-2 w-28"
 					>
 						&lt; Post

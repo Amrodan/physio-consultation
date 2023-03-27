@@ -14,21 +14,13 @@ function LandingPage() {
 						<img src={run} alt="logo" />
 					</picture>
 					<span className="btn_span top-auto bottom-1  left-1/3 align-text-top absolute  ">
-						<button className="bg-gray-800 	 hover:bg-sky-900	 text-white font-bold   rounded">
+						<button className="bg-gray-800 	 hover:bg-green-900	 text-white font-bold   rounded">
 							<Link to="/newsFeed">
-								<Trans i18nKey="description.part6">Join Our Discussion Group</Trans>
+								<Trans i18nKey="description.part6">Participate in Discussions</Trans>
+								{/* Connect with Others */}
 							</Link>
 						</button>
 					</span>
-					{/* <p>
-						<Trans i18nKey="description.part3">
-							Online physiotherapy can be a convenient and effective way to manage injuries and guide your
-							recovery.
-						</Trans>
-					</p> */}
-					{/* <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-						{t('description.part3')}
-					</a> */}
 
 					<div className="nav_open text-wrap text-3xl   w-2/5 absolute font-semibold text-white top-32 left-20  ">
 						<p>
@@ -64,7 +56,7 @@ function TextWrapper() {
 	return (
 		<div>
 			<section className="textContainer justify-center flex">
-				<article className="text_container text-center w-11/12 mt-16   ">
+				<article className=" text-center w-11/12 md:mt-16   ">
 					<h1 className="before:text-yellow-400  before:content-['Ph']">ysiotherapy Consultation</h1>
 					<div className="flex justify-center mt-10">
 						<div className="line line_wrap w-36 max-w-1/10 h-0.5 bg-yellow-400       " />
@@ -200,20 +192,6 @@ function TextWrapper() {
 						{' '}
 						They can also help you reduce the chance of future injuries.
 					</Trans>
-				</p>
-				<h1 className="text-amber-500 text-2xl m-4	"> Am I eligible for physiotherapy?</h1>{' '}
-				<p className="m-4">
-					Yes, you can see a physiotherapist at any time. You don’t have to see your doctor before you see a
-					physiotherapist. However, it is good to see your doctor to talk about options and to get a referral.
-					Tell your physiotherapist about any major health problems, past injuries, and how much exercise you
-					do. To find one, ask a friend. Ask your doctor. Or search for physiotherapists online through the
-					healthdirect service finder.
-				</p>{' '}
-				<h1 className="text-amber-500 text-2xl m-4	"> Cost of physiotherapy </h1>{' '}
-				<p className="m-4">
-					Costs vary — check before you go. Medicare covers some visits, but only if your doctor has referred
-					you. If you have private health insurance, it might cover physiotherapy. Check what your plan covers
-					before you go.
 				</p>
 			</div>
 			<section className="utube flex justify-center relative p-12">

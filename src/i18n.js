@@ -28,7 +28,7 @@ i18n
 							'Online physiotherapy can be a convenient and effective way to manage injuries and guide your recovery',
 						part4: 'Visit my Channel on youtube',
 						part5: 'Joerg Teichmann',
-						part6: 'Join Our Discussion Group',
+						part6: 'Participate in Discussions',
 						part7:
 							'	A physiotherapist can treat you if you have a problem with pain or movement. Physiotherapy could help you become more mobile and make you more comfortable.',
 						part8:
@@ -57,7 +57,8 @@ i18n
 						part28: 'occupational health',
 						part31: 'What is physiotherapy?',
 						part29: 'They can also help you reduce the chance of future injuries.',
-						part30: 'What does a physiotherapist do'
+						part30: 'What does a physiotherapist do',
+						part36: 'Choose the date below'
 					}
 				}
 			},
@@ -74,7 +75,7 @@ i18n
 						part5: ' يورج تيشمان',
 						part6: 'انضم إلى مجموعة المناقشة الخاصة بنا',
 						part7:
-							'استشارة العلاج الطبيعييمكن لأخصائي العلاج الطبيعي أن يعالجك إذا كنت تعاني من مشكلة في الألم أو الحركة. يمكن أن يساعدك العلاج الطبيعي على أن تصبح أكثر قدرة على الحركة ويجعلك أكثر راحة.						',
+							'يمكن لأخصائي العلاج الطبيعي أن يعالجك إذا كنت تعاني من مشكلة في الألم أو الحركة. يمكن أن يساعدك العلاج الطبيعي على أن تصبح أكثر قدرة على الحركة ويجعلك أكثر راحة.						',
 						part8:
 							'يستخدم العلاج الطبيعي تقنيات جسدية لتحسين الحركة وتقليل الألم والتيبس وتسريع عملية الشفاء وزيادة جودة الحياة.',
 						part9:
@@ -101,7 +102,8 @@ i18n
 						part28: 'صحة مهنية',
 						part29: 'يمكنهم أيضًا مساعدتك في تقليل فرصة التعرض لإصابات في المستقبل',
 						part31: 'ما هو العلاج الطبيعي؟',
-						part30: 'ماذا يفعل اخصائي العلاج الطبيعي؟						'
+						part30: 'ماذا يفعل اخصائي العلاج الطبيعي؟',
+						part36: 'اختر التاريخ أدناه'
 					}
 				}
 			}

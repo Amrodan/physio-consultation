@@ -3,25 +3,28 @@ import { v4 as uuid } from 'uuid';
 import { useAuthValue } from '../context/AuthContext';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './../components/firebase';
-
 import { useNavigate } from 'react-router-dom';
+
 const Feed = (props) => {
 	const { currentUser } = useAuthValue();
 	const navigate = useNavigate();
 	const [ post, setPost ] = useState('');
 
-	const handleClick = (post) => {
-		// history.push(`/posts/${post}`);
-		navigate(`/posts/${post}`);
-		// console.log(id);
-	};
 	const usersCollectionRef = collection(db, 'list');
+
 	const id = uuid();
+	let adminEmail = 'amrdandashli@gmail.com';
+	let isAdmin = currentUser && currentUser.email === adminEmail;
 	let userId = currentUser.uid;
 	let userName = currentUser.displayName;
+	// const isAdmin = currentUser?.email === adminEmail;
+	// const userId = currentUser?.uid;
+	// const userName = currentUser?.displayName;
 	const { list } = props;
 	const { setList } = props;
-
+	const handleClick = (post) => {
+		navigate(`/posts/${post}`);
+	};
 	useEffect(() => {
 		// console.log(list);
 		const getUsersPosts = async () => {
@@ -39,12 +42,12 @@ const Feed = (props) => {
 		setList(update);
 	};
 
-	function handleChange(event) {
+	const handleChange = (event) => {
 		event.preventDefault();
 		setPost(event.target.value);
-	}
+	};
 
-	function handleAdd(event) {
+	const handleAdd = (event) => {
 		event.preventDefault();
 		if (!post) {
 			return;
@@ -64,16 +67,18 @@ const Feed = (props) => {
 				.catch((err) => {
 					console.log(err.message);
 				});
+			console.log(userId);
+			console.log(currentUser.uid);
 
 			setPost('');
 		}
-	}
+	};
 
 	return (
 		<div>
 			<div>
 				<div className=" feed_input flex  text-inherit justify-center mt-9 text-grey-900 text-black	 pb-5">
-					<div className=" feed_no bg-teal-700 border-solid justify-evenly   rounded-2xl w-4/5	flex  items-center p-3 ">
+					<div className=" feed_no bg-teal-700 border-solid justify-evenly sm:w-1/12 md:w-10/12  rounded-2xl w-11/12	flex  items-center p-3 ">
 						<div>
 							<h4 className="font-serif text-2xl text-pink-900 create_post	">Create post</h4>
 						</div>
@@ -83,7 +88,7 @@ const Feed = (props) => {
 									type="text"
 									value={post}
 									onChange={handleChange}
-									className="feed rounded-3xl p-2 bg-white  w-96 outline-none text-md whitespace-pre-line   placeholder-gray-500 "
+									className="feed rounded-3xl p-2 bg-white  w-96 outline-none text-neutral-900 text-md whitespace-pre-line   placeholder-gray-500 "
 									placeholder="  Share your thoughts..."
 								/>
 
@@ -116,10 +121,7 @@ const Feed = (props) => {
 									<div className="tooltip">
 										<span
 											className=" cursor-pointer"
-											onClick={() =>
-												item.userId === currentUser.uid
-													? deleteUserPost(item.id)
-													: alert('u can only delete ur post ')}
+											onClick={() => deleteUserPost(item.id)}
 											type="button"
 										>
 											<svg

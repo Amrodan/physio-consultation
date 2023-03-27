@@ -1,8 +1,10 @@
 .container_contact__contaienr {
 	display: grid;
 	/* width: 61%; */
-	grid-template-columns: 30% 58%;
-
+	/* grid-template-columns: 30% 58%; */
+	width: var(--container-width-sm);
+	grid-template-columns: 1fr;
+	margin: 0 auto;
 	gap: 11%;
 }
 
@@ -85,9 +87,6 @@ textarea {
 	}
 }
 @media screen and (max-width: 1080px) {
-	section {
-		/* margin: 6rem !important; */
-	}
 	article,
 	.contact__option {
 		overflow: auto !important;

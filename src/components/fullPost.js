@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from './../components/firebase';
 import { useAuthValue } from '../context/AuthContext';
 // import { v4 as uuid } from 'uuid';
-
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 function Post(props) {
 	const { id } = useParams();
 	const [ input, setInput ] = useState('');
-
 	const [ comments, setComments ] = useState([]);
-
-	const usersCollectionRef = collection(db, 'comment');
-	// const ide = uuid();
-	const [ showReplyForm, setShowReplyForm ] = useState(false);
+	let adminEmail = 'amrdandashli@gmail.com';
 	const { currentUser } = useAuthValue();
+	const navigate = useNavigate();
+	let isAdmin = currentUser && currentUser.email === adminEmail;
+	const usersCollectionRef = collection(db, 'comment');
+
+	const [ showReplyForm, setShowReplyForm ] = useState(false);
 
 	function handleCommentSubmit(event) {
 		event.preventDefault();
@@ -25,8 +25,7 @@ function Post(props) {
 			return;
 		} else {
 			setComments([ ...comments, { postId: id, comment, userId, currentUser, userName } ]);
-			// const newList = reply.concat({ input, userId, id, currentUser, userName });
-			// setComments(newList);
+
 			setInput('');
 			const movieCollectionRef = collection(db, 'comment');
 			const payload = { postId: id, comment, userId, userName };
@@ -38,10 +37,8 @@ function Post(props) {
 				.catch((err) => {
 					console.log(err.message);
 				});
-			// setInput('');
 		}
 	}
-	// const postComments = comments.filter((c) => c.id === id);
 
 	useEffect(
 		() => {
@@ -90,7 +87,7 @@ function Post(props) {
 			))}{' '}
 			<div className="   ">
 				{comments.map((c) => (
-					<div key={id} className="flex justify-center  items-center font-black 	m-4     text-slate-900">
+					<div key={c.id} className="flex justify-center  items-center font-black 	m-4     text-slate-900">
 						<div className="italic break-words message h-full  ml-4 w-9/12 " key={c.comment}>
 							{c.comment}
 
@@ -118,9 +115,15 @@ function Post(props) {
 					</div>
 				))}
 			</div>
-			<button className=" reply rounded-lg  " onClick={toggleReplyForm}>
-				Reply
-			</button>
+			<div className="justify-center flex">
+				{' '}
+				<button
+					className="  rounded-lg hover:bg-emerald-900 hover:text-black border-solid border-2 w-28"
+					onClick={toggleReplyForm}
+				>
+					Reply
+				</button>
+			</div>
 			{showReplyForm && (
 				<form className="items-center m-auto" onSubmit={handleCommentSubmit}>
 					<textarea
@@ -131,13 +134,26 @@ function Post(props) {
 						name="comment"
 						className="w-7/12 break-words "
 					/>
-					<button type="submit" className="button rounded-lg">
+					<button
+						type="submit"
+						className=" hover:bg-emerald-900 hover:text-black	  inline-block w-28 bg-transparent border-white  border-2 ease-out border-solid duration-700 rounded-lg"
+					>
 						Submit
 					</button>
 				</form>
 			)}
+			<div className="justify-center flex">
+				<a href="/">
+					<button
+						onClick={() => navigate(-1)}
+						className="  rounded-lg hover:bg-red-700 hover:text-white border-solid border-2 w-28"
+					>
+						&lt; Post
+					</button>
+				</a>
+			</div>
 		</div>
 	);
 }
 
-export default Post;
+export default memo(Post);

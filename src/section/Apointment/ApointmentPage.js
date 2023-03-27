@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import EnhancedTable from './table';
+// import EnhancedTable from './table';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import AppointmentDialog from './ApointmentDialog';
+import { Trans, useTranslation } from 'react-i18next';
+
 const CalendarContainer = styled.div`
 	/* ~~~ container styles ~~~ */
 	.MuiDialog-paperWidthSm {
@@ -95,6 +97,7 @@ const AppointmentPage = () => {
 	});
 	const [ open, setOpen ] = useState(false);
 	// const Auth = Authentication();
+	const { i18n } = useTranslation();
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -122,7 +125,8 @@ const AppointmentPage = () => {
 				<section className="grid grid-column">
 					<div className="available_appointments_main_container">
 						<h1 className="main_title_appointmentPage text-center">
-							{Value.toDateString()} <pre> </pre>Choose the date below
+							{Value.toDateString()} <pre> </pre>{' '}
+							<Trans i18nKey="description.part36">Choose the date below</Trans>
 						</h1>
 						<div className="appointmentPage   grid gap-8 grid-rows-2 grid-cols-3   ">
 							<div className="bg-sky-900	 ">

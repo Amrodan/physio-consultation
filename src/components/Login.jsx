@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './forms.css';
 import {
@@ -24,29 +24,29 @@ export default function Login2() {
 	const { setTimeActive } = useAuthValue();
 	const [ isChecked, setIsChecked ] = useState(false);
 	const [ isRevealPwd, setIsRevealPwd ] = useState(false);
+	const [ isAdmin, setIsAdmin ] = useState(false);
+	const [ user, setUser ] = useState(null);
 
+	const { currentUser } = useAuthValue();
 	const history = useNavigate();
+	const users = currentUser;
+	const usersRef = collection(db, 'users');
 
-	// const signInWithFb = () => {
-	// 	const provider = new FacebookAuthProvider();
-	// 	signInWithPopup(auth, provider)
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err.message);
-	// 		});
-	// };
-	// const signInWithGoogle = () => {
-	// 	const provider = new GoogleAuthProvider();
-	// 	signInWithPopup(auth, provider)
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err.message);
-	// 		});
-	// };
+	// useEffect(
+	// 	() => {
+	// 		// console.log(list);
+	// 		const isadmin = async () => {
+	// 			const queri = query(usersRef, where('isAdmin', '==', true));
+	// 			const data = await getDocs(queri);
+	// 			if (users && data) {
+	// 				history('adminPage');
+	// 			}
+	// 		};
+
+	// 		isadmin();
+	// 	},
+	// 	[ users, usersRef ]
+	// );
 	const googleProvider = new GoogleAuthProvider();
 	const signInWithGoogle = async () => {
 		try {
@@ -90,7 +90,7 @@ export default function Login2() {
 				});
 			}
 		} catch (err) {
-			console.error(err);
+			// console.error(err);
 			setError(err.message.split(' ').slice(1).join(' '));
 		}
 	};
@@ -98,10 +98,13 @@ export default function Login2() {
 		setIsChecked(!isChecked);
 	};
 
-	const login = (e) => {
+	const login = async (e) => {
 		e.preventDefault();
+		const queri = query(usersRef, where('isAdmin', '==', true));
+		const data = await getDocs(queri);
 		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
+				// currentUser.uid === 'nrQh9Ygk27cxw0BiAxvrFJ1nSa13' && history('adminPage');
 				if (!auth.currentUser.emailVerified) {
 					sendEmailVerification(auth.currentUser).then(() => {
 						setTimeActive(true);
@@ -110,6 +113,7 @@ export default function Login2() {
 					// .catch((err) => setError(err.message));
 				} else {
 					history('/profile');
+					console.log(auth);
 				}
 			})
 			.catch((err) => {
@@ -127,7 +131,7 @@ export default function Login2() {
 	};
 
 	return (
-		<div className="img_log	 relative  w-full h-screen bg-zinc-900/90">
+		<div className="img_log	 relative  w-full h-full bg-zinc-900/90">
 			{/* <img className="absolute w-full h-full   mix-blend-overlay" alt="log in" /> */}
 
 			<div className="flex justify-center items-center ">
@@ -207,7 +211,7 @@ export default function Login2() {
 						<label htmlFor="x">Remember Me</label>
 					</p>
 					<p className="text-center mt-8 ">
-						Not a member? <Link to="/signup"> Sign up </Link>now
+						Not a member ? &nbsp; <Link to="/signup"> Sign up</Link>&nbsp;now
 					</p>
 				</form>
 			</div>

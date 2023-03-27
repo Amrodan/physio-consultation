@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
-import Omega from '../assets/images/Omega.png';
+import Omega from '../assets/images/Omega.bmp';
 
 import { useTranslation, Trans } from 'react-i18next';
 

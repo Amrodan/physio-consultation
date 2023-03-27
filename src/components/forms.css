@@ -5,32 +5,7 @@
 	padding: 20px;
 	text-align: center;
 }
-.button {
-	display: inline-block;
-	border-radius: 3px;
-	/* padding: 0.5rem 0; */
-	/* margin: 0.5rem 1rem; */
-	width: 7rem;
-	background: transparent;
-	color: rgb(255, 255, 255);
-	border: 2px solid white;
-	transition: 0.5s all ease-out;
-}
 
-.button:hover {
-	background-color: rgb(19, 100, 66);
-	color: black;
-}
-.reply {
-	border: 2px solid white;
-	width: 7rem;
-	margin: auto;
-}
-.reply:hover {
-	border: 2px solid white;
-	background-color: rgb(19, 100, 66);
-	color: black;
-}
 .btn_hover:hover {
 	background-color: rgb(19, 100, 66);
 	color: black;
@@ -91,6 +66,28 @@
 	height: 100%;
 	background-size: cover;
 }
+.img_log {
+	position: relative;
+}
+
+.img_log p {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	padding: 0.5rem 0.75rem;
+}
+
+.img_log p:hover {
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.img_log input:focus {
+	outline: none;
+	border-color: #6366f1;
+	background-color: #e5e7eb;
+}
+
 .auth__error {
 	padding: 10px 0;
 	background-color: hsl(0, 79%, 87%);

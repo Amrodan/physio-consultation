@@ -5,10 +5,13 @@ import {
 	sendEmailVerification,
 	signInWithPopup,
 	FacebookAuthProvider,
+	updateProfile,
 	GoogleAuthProvider
 } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from './../components/firebase';
+
+// import { auth } from './firebase';
+import { db } from './firebase';
 
 import { Link, useNavigate } from 'react-router-dom';
 import './forms.css';
@@ -19,13 +22,16 @@ import { AiFillFacebook } from 'react-icons/ai';
 
 export default function Register1() {
 	const { setTimeActive } = useAuthValue();
-	console.log(setTimeActive);
+	// console.log(setTimeActive);
 	const [ email, setEmail ] = useState('');
+	const [ displayName, setDisplayName ] = useState('');
+
 	const [ password, setPassword ] = useState('');
 	const [ confirmPassword, setConfirmPassword ] = useState('');
 	const [ error, setError ] = useState('');
 
 	const history = useNavigate();
+
 	const signInWithFb = () => {
 		const provider = new FacebookAuthProvider();
 		signInWithPopup(auth, provider)
@@ -46,63 +52,76 @@ export default function Register1() {
 				console.log(err.message);
 			});
 	};
-	const validatePassword = () => {
-		let isValid = true;
-		if (password !== '' && confirmPassword !== '') {
-			if (password !== confirmPassword) {
-				isValid = false;
-				setError('Passwords does not match');
-			}
-		}
-		return isValid;
-	};
-	const registerWithEmailAndPassword = async (e) => {
-		// console.log(e);
-		e.preventDefault();
-		try {
-			if (validatePassword()) {
-				const res = await createUserWithEmailAndPassword(auth, email, password);
-				sendEmailVerification(auth.currentUser).then(() => {
-					setTimeActive(true);
-					history('/verify-email');
-				});
-				const user = res.user;
-				await addDoc(collection(db, 'users'), {
-					uid: user.uid,
+	// const validatePassword = () => {
+	// 	let isValid = true;
+	// 	if (password !== '' && confirmPassword !== '') {
+	// 		if (password !== confirmPassword) {
+	// 			isValid = false;
+	// 			setError('Passwords does not match');
+	// 		}
+	// 	}
+	// 	return isValid;
+	// };
 
-					authProvider: 'local',
-					email
-				});
-			}
+	// const registerWithEmailAndPassword = async (e) => {
+	// 	e.preventDefault();
+	// 	try {
+	// 		if (validatePassword()) {
+	// 			const res = await createUserWithEmailAndPassword(auth, email, password);
+	// 			sendEmailVerification(auth.currentUser).then(() => {
+	// 				setTimeActive(true);
+	// 				history('/verify-email');
+	// 			});
+
+	// 			updateProfile(auth.currentUser, { displayName });
+
+	// 			const user = res.user;
+	// 			await addDoc(collection(db, 'users'), {
+	// 				uid: user.uid,
+	// 				isAdmin: false,
+	// 				authProvider: 'local',
+	// 				email,
+	// 				displayName
+	// 			});
+	// 		}
+	// 	} catch (err) {
+	// 		// console.error(err);
+	// 		setError(err.message.split(' ').slice(1).join(' '));
+	// 	}
+	// };
+	const registerWithEmailAndPassword = async (e) => {
+		e.preventDefault();
+		setError('');
+		if (password !== confirmPassword) {
+			setError('Passwords do not match');
+			return;
+		}
+		try {
+			const res = await createUserWithEmailAndPassword(auth, email, password);
+			sendEmailVerification(auth.currentUser).then(() => {
+				setTimeActive(true);
+				history('/verify-email');
+			});
+
+			updateProfile(auth.currentUser, { displayName });
+
+			const user = res.user;
+			await addDoc(collection(db, 'users'), {
+				uid: user.uid,
+				isAdmin: false,
+				authProvider: 'local',
+				email,
+				displayName
+			});
 		} catch (err) {
-			console.error(err);
 			setError(err.message.split(' ').slice(1).join(' '));
 		}
 	};
-	// const register = (e) => {
-	// 	e.preventDefault();
-	// 	setError('');
-	// 	if (validatePassword()) {
-	// 		// Create a new user with email and password using firebase
-	// 		createUserWithEmailAndPassword(auth, email, password).then(() => {
-	// 			sendEmailVerification(auth.currentUser)
-	// 				.then(() => {
-	// 					setTimeActive(true);
-	// 					history('/verify-email');
-	// 				})
-	// 				.catch((err) => alert(err.message));
-	// 		});
-	// 	}
-	// 	setEmail('');
-	// 	setPassword('');
-	// 	setConfirmPassword('');
-	// };
-
 	return (
-		<div className="img_log	 relative w-full h-screen bg-zinc-900/90">
+		<div className="img_log	 relative w-full h-full bg-zinc-900/90">
 			{/* <img className="absolute w-full h-full   mix-blend-overlay" alt="log in" /> */}
 
-			<div className="flex justify-center items-center  h-screen">
+			<div className="flex justify-center items-center h-4/5 ">
 				{/* {error && <div className="auth__error">{error}</div>} */}
 
 				<form
@@ -111,7 +130,7 @@ export default function Register1() {
 					name="registration_form"
 				>
 					<h2 className="text-4xl font-bold text-center py-4">signup</h2>
-					<div className="flex justify-between py-8">
+					<div className="flex justify-between py-6">
 						<p className="border shadow-lg hover:shadow-xl px-6 py-2 relative flex items-center">
 							<button onClick={signInWithFb} className="flex items-center">
 								<AiFillFacebook className="mr-2" /> Facebook
@@ -123,6 +142,17 @@ export default function Register1() {
 							</button>
 						</p>
 					</div>
+					<div className="flex flex-col mb-4">
+						<label>Name</label>
+						<input
+							className="border relative bg-gray-100 p-2"
+							type="name"
+							value={displayName}
+							placeholder="Enter your Name"
+							required
+							onChange={(e) => setDisplayName(e.target.value)}
+						/>
+					</div>{' '}
 					<div className="flex flex-col mb-4">
 						<label>Email</label>
 						<input
@@ -162,7 +192,7 @@ export default function Register1() {
 					<p className="text-red-600">
 						<strong>{error}</strong>{' '}
 					</p>
-					<span className="text-center mt-8 ">
+					<span className="text-center mt-2 ">
 						Already have an account?
 						<Link to="/signin"> login</Link>
 					</span>

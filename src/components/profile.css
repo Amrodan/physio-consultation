@@ -1,17 +1,40 @@
-.profile{
-  width: 90%;
-  max-width: 400px;
-  border: 1px solid #dcdcdc;
-  padding: 20px;
-  text-align: center;
+.profile-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 8px;
 }
 
-.profile p {
-  text-align: left;
+.profile-header {
+	text-align: center;
+	margin-bottom: 16px;
 }
 
-.profile > span{
-  color: blue;
-  cursor: pointer;
-  margin-top: 30px;
+.profile-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-bottom: 16px;
+}
+
+.profile-info p {
+	margin: 8px 0;
+}
+
+.profile-actions {
+	display: flex;
+	justify-content: center;
+}
+
+.primary-button {
+	padding: 8px 16px;
+	border-radius: 4px;
+	color: #fff;
+	background-color: var(--primary-color, #007bff);
+	border: none;
+	cursor: pointer;
+}
+
+.primary-button:hover {
+	background-color: #0069d9;
 }

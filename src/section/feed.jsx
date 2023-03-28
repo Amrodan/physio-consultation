@@ -78,7 +78,7 @@ const Feed = (props) => {
 		<div>
 			<div>
 				<div className=" feed_input flex  text-inherit justify-center mt-9 text-grey-900 text-black	 pb-5">
-					<div className=" feed_no bg-teal-700 border-solid justify-evenly sm:w-1/12 md:w-10/12  rounded-2xl w-11/12	flex  items-center p-3 ">
+					<div className=" feed_no bg-teal-700 border-solid justify-evenly sm:w-10/12 md:w-10/12  rounded-2xl w-11/12	flex  items-center p-3 ">
 						<div>
 							<h4 className="font-serif text-2xl text-pink-900 create_post	">Create post</h4>
 						</div>
@@ -117,7 +117,7 @@ const Feed = (props) => {
 									{item.post && item.post.substring(0, 100)}...
 								</div>
 
-								{item.userId === currentUser.uid && (
+								{(isAdmin || item.userId === currentUser.uid) && (
 									<div className="tooltip">
 										<span
 											className=" cursor-pointer"

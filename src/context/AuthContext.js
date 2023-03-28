@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 		return unsubscribe;
 	}, []);
 
-	// Create an object that contains the auth state and any functions that modify it
+	// an object that contains the auth state and any functions that modify it
 	const value = {
 		currentUser,
 		sendPasswordReset
@@ -39,5 +39,5 @@ export const AuthProvider = ({ children }) => {
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// Export a custom hook that allows components to access the auth state
+//   access the auth state
 export const useAuthValue = () => useContext(AuthContext);

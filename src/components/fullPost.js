@@ -44,10 +44,7 @@ function Post(props) {
 		() => {
 			const getUsersPosts = async () => {
 				const queri = query(usersCollectionRef, where('postId', '==', id));
-
 				const data = await getDocs(queri);
-				// console.log(currentUser.uid);
-
 				setComments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 			};
 
@@ -77,7 +74,7 @@ function Post(props) {
 	return (
 		<div className=" grid gap-4 m-3  ">
 			{props.list.map((item) => (
-				<div className=" flex justify-center   ">
+				<div key={item.id} className=" flex justify-center">
 					{item.id === id && (
 						<p className="italic message break-words ml-4 w-9/12  " key={item.id}>
 							{item.post}
@@ -85,13 +82,13 @@ function Post(props) {
 					)}
 				</div>
 			))}{' '}
-			<div className="   ">
+			<div>
 				{comments.map((c) => (
 					<div key={c.id} className="flex justify-center  items-center font-black 	m-4     text-slate-900">
 						<div className="italic break-words message h-full  ml-4 w-9/12 " key={c.comment}>
 							{c.comment}
 
-							{c.userId === currentUser.uid && (
+							{(isAdmin || c.userId === currentUser.uid) && (
 								<div className="tooltip float-right ">
 									<span
 										className=" cursor-pointer"

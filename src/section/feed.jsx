@@ -5,23 +5,17 @@ import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore'
 import { db } from './../components/firebase';
 import { useNavigate } from 'react-router-dom';
 
-const Feed = (props) => {
+const Feed = ({ list, setList }) => {
 	const { currentUser } = useAuthValue();
 	const navigate = useNavigate();
 	const [ post, setPost ] = useState('');
 
 	const usersCollectionRef = collection(db, 'list');
 
-	const id = uuid();
 	let adminEmail = 'amrdandashli@gmail.com';
 	let isAdmin = currentUser && currentUser.email === adminEmail;
-	let userId = currentUser.uid;
-	let userName = currentUser.displayName;
 	// const isAdmin = currentUser?.email === adminEmail;
-	// const userId = currentUser?.uid;
-	// const userName = currentUser?.displayName;
-	const { list } = props;
-	const { setList } = props;
+
 	const handleClick = (post) => {
 		navigate(`/posts/${post}`);
 	};
@@ -38,7 +32,7 @@ const Feed = (props) => {
 	const deleteUserPost = async (id) => {
 		const userDoc = doc(db, 'list', id);
 		await deleteDoc(userDoc);
-		const update = props.list.filter((input) => input.id !== id);
+		const update = list.filter((input) => input.id !== id);
 		setList(update);
 	};
 
@@ -46,31 +40,21 @@ const Feed = (props) => {
 		event.preventDefault();
 		setPost(event.target.value);
 	};
-
-	const handleAdd = (event) => {
+	const handleAdd = async (event) => {
 		event.preventDefault();
-		if (!post) {
-			return;
-		} else {
-			const newList = props.list.concat({ post, userId, id, currentUser, userName });
+		if (!post) return;
 
-			setList(newList);
+		const id = uuid();
+		const userId = currentUser.uid;
+		const userName = currentUser.displayName;
+		const payload = { id, post, userId, userName };
+
+		try {
+			await addDoc(usersCollectionRef, payload);
+			setList((prevList) => [ ...prevList, payload ]);
 			setPost('');
-
-			const movieCollectionRef = collection(db, 'list');
-			const payload = { id, post, userId, userName };
-
-			addDoc(movieCollectionRef, payload)
-				.then((snapshot) => {
-					console.log(snapshot);
-				})
-				.catch((err) => {
-					console.log(err.message);
-				});
-			console.log(userId);
-			console.log(currentUser.uid);
-
-			setPost('');
+		} catch (err) {
+			console.log(err.message);
 		}
 	};
 

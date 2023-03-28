@@ -1,6 +1,6 @@
 import { useTranslation, Trans } from 'react-i18next';
 
-function Landing_text() {
+function Landingtext() {
 	const { t, i18n } = useTranslation();
 
 	return (
@@ -170,4 +170,4 @@ function Landing_text() {
 		</>
 	);
 }
-export default Landing_text
+export default Landingtext

@@ -1,9 +1,9 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from './../components/firebase';
 import { useAuthValue } from '../context/AuthContext';
-// import { v4 as uuid } from 'uuid';
 import { useParams, useNavigate } from 'react-router-dom';
+
 function Post(props) {
 	const { id } = useParams();
 	const [ input, setInput ] = useState('');
@@ -12,37 +12,42 @@ function Post(props) {
 	const { currentUser } = useAuthValue();
 	const navigate = useNavigate();
 	let isAdmin = currentUser && currentUser.email === adminEmail;
-	const usersCollectionRef = collection(db, 'comment');
 
 	const [ showReplyForm, setShowReplyForm ] = useState(false);
 
-	function handleCommentSubmit(event) {
-		event.preventDefault();
-		const comment = event.target.elements.comment.value;
-
-		setComments([ ...comments, { postId: id, comment, userId, currentUser, userName } ]);
-		if (!input) {
-			return;
-		} else {
+	const handleCommentSubmit = useCallback(
+		(event) => {
+			event.preventDefault();
+			const comment = event.target.elements.comment.value;
+			let userId = currentUser.uid;
+			let userName = currentUser.displayName;
 			setComments([ ...comments, { postId: id, comment, userId, currentUser, userName } ]);
+			if (!input) {
+				return;
+			} else {
+				setComments([ ...comments, { postId: id, comment, userId, currentUser, userName } ]);
 
-			setInput('');
-			const movieCollectionRef = collection(db, 'comment');
-			const payload = { postId: id, comment, userId, userName };
+				setInput('');
+				const movieCollectionRef = collection(db, 'comment');
+				const payload = { postId: id, comment, userId, userName };
 
-			addDoc(movieCollectionRef, payload)
-				.then((snapshot) => {
-					console.log(snapshot);
-				})
-				.catch((err) => {
-					console.log(err.message);
-				});
-		}
-	}
+				addDoc(movieCollectionRef, payload)
+					.then((snapshot) => {
+						console.log(snapshot);
+					})
+					.catch((err) => {
+						console.log(err.message);
+					});
+			}
+		},
+		[ input ]
+	);
 
 	useEffect(
 		() => {
 			const getUsersPosts = async () => {
+				const usersCollectionRef = collection(db, 'comment');
+
 				const queri = query(usersCollectionRef, where('postId', '==', id));
 				const data = await getDocs(queri);
 				setComments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -50,16 +55,26 @@ function Post(props) {
 
 			getUsersPosts();
 		},
-		[ id, usersCollectionRef ]
+		[ id ]
 	);
+	// useEffect(
+	// 	() => {
+	// 		const getUsersPosts = async () => {
+	// 			const data = await getDocs();
+	// 			setComments((prevComments) => [
+	// 				...prevComments,
+	// 				...data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+	// 			]);
+	// 		};
 
-	let userId = currentUser.uid;
-	let userName = currentUser.displayName;
+	// 		getUsersPosts();
+	// 	},
+	// 	[ id ]
+	// );
 
-	function handleChange(event) {
-		event.preventDefault();
+	const handleChange = useCallback((event) => {
 		setInput(event.target.value);
-	}
+	}, []);
 
 	const toggleReplyForm = (event) => {
 		setShowReplyForm(!showReplyForm);

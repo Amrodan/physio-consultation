@@ -27,8 +27,8 @@ i18n
 						part3:
 							'Online physiotherapy can be a convenient and effective way to manage injuries and guide your recovery',
 						part4: 'Visit my Channel on youtube',
-						part5: 'Joerg Teichmann',
-						part6: 'Participate in Discussions',
+						part5: '"Joerg Teichmann"',
+						part6: 'Ask the Expert',
 						part7:
 							'	A physiotherapist can treat you if you have a problem with pain or movement. Physiotherapy could help you become more mobile and make you more comfortable.',
 						part8:

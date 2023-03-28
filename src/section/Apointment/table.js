@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from '../../components/firebase';
-
+import './apointment.css';
 const TableContent = () => {
 	const [ list, setList ] = useState([]);
 	const usersCollectionRef = collection(db, 'bookedtime');
@@ -25,7 +25,7 @@ const TableContent = () => {
 		<div className="m-14">
 			<div className="flex justify-center m-3">{/* <h2>Hello my soulmate ❤ </h2> */}</div>
 			<div className="flex justify-center">
-				<table className="w-10/12 border-collapse h-80		">
+				<table className="w-10/12 border-collapse h-full		">
 					<thead>
 						<tr>
 							<th className="border-solid border-2 border-b		">Name</th>

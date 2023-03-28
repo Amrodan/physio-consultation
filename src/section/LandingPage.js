@@ -3,7 +3,7 @@ import '../styles/landing.css';
 import { Link } from 'react-router-dom';
 
 import { useTranslation, Trans } from 'react-i18next';
-import Landing_text from '../components/Landing_text';
+import Landingtext from '../components/Landing_text';
 function LandingPage() {
 	const { t, i18n } = useTranslation();
 
@@ -47,7 +47,7 @@ function LandingPage() {
 				</div>
 			</div>
 
-			<Landing_text />
+			<Landingtext />
 		</>
 	);
 }
